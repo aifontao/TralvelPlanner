@@ -40,6 +40,6 @@ CREATE TABLE photos (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     trip_id INTEGER NOT NULL,
     filename TEXT,
-    caption TEXT
+    caption TEXT,
     FOREIGN KEY (trip_id) REFERENCES trips(id)
 );

@@ -20,3 +20,18 @@ CREATE TABLE trips (
     confirmed_end_date DATE,
     FOREIGN KEY (user_id) REFERENCES users(id),
 );
+
+CREATE TABLE buddies (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    trip_id INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    relationship_type TEXT NOT NULL,
+    FOREIGN KEY (trip_id) REFERENCES trips(id),
+);
+
+CREATE TABLE experiences (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    trip_id INTEGER NOT NULL,
+    type TEXT NOT NULL,
+    FOREIGN KEY (trip_id) REFERENCES trips(id),
+);

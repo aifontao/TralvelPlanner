@@ -1,7 +1,7 @@
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     username TEXT NOT NULL,
-    hash TEXT NOT NULL,
+    hash TEXT NOT NULL
 );
 
 CREATE TABLE trips (
@@ -18,7 +18,7 @@ CREATE TABLE trips (
     notes TEXT,
     confirmed_start_date DATE,
     confirmed_end_date DATE,
-    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE buddies (
@@ -26,19 +26,19 @@ CREATE TABLE buddies (
     trip_id INTEGER NOT NULL,
     name TEXT NOT NULL,
     relationship_type TEXT NOT NULL,
-    FOREIGN KEY (trip_id) REFERENCES trips(id),
+    FOREIGN KEY (trip_id) REFERENCES trips(id)
 );
 
 CREATE TABLE experiences (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     trip_id INTEGER NOT NULL,
     type TEXT NOT NULL,
-    FOREIGN KEY (trip_id) REFERENCES trips(id),
+    FOREIGN KEY (trip_id) REFERENCES trips(id)
 );
 
 CREATE TABLE photos (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     trip_id INTEGER NOT NULL,
     filename TEXT,
-    caption TEXT,
+    caption TEXT
 );

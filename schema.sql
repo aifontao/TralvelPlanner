@@ -35,3 +35,10 @@ CREATE TABLE experiences (
     type TEXT NOT NULL,
     FOREIGN KEY (trip_id) REFERENCES trips(id),
 );
+
+CREATE TABLE photos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    trip_id INTEGER NOT NULL,
+    filename TEXT,
+    caption TEXT,
+);

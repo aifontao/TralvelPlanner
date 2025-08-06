@@ -12,12 +12,12 @@ CREATE TABLE trips (
     city TEXT NOT NULL,
     status TEXT NOT NULL,
     trip_type TEXT NOT NULL,
-    date_created DATE,
-    planned_date DATE,
+    date_created TEXT,
+    planned_date TEXT,
     rating INTEGER NOT NULL CHECK (rating >=1 AND rating <= 5),
     notes TEXT,
-    confirmed_start_date DATE,
-    confirmed_end_date DATE,
+    confirmed_start_date TEXT,
+    confirmed_end_date TEXT,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 

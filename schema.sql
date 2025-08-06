@@ -1,5 +1,22 @@
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     username TEXT NOT NULL,
-    hash TEXT NOT NULL
-)
+    hash TEXT NOT NULL,
+);
+
+CREATE TABLE trips (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    user_id INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    country TEXT NOT NULL,
+    city TEXT NOT NULL,
+    status TEXT NOT NULL,
+    trip_type TEXT NOT NULL,
+    date_created DATE,
+    planned_date DATE,
+    rating INTEGER NOT NULL MIN 1 MAX 5,
+    notes TEXT,
+    confirmed_start_date DATE,
+    confirmed_end_date DATE,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+);

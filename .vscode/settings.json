@@ -1,0 +1,7 @@
+{
+    "javascript.suggest.enabled": false,
+    "typescript.suggest.enabled": false,
+    "editor.quickSuggestions": {
+        "other": "off"
+    }
+}

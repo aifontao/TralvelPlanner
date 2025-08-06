@@ -41,4 +41,5 @@ CREATE TABLE photos (
     trip_id INTEGER NOT NULL,
     filename TEXT,
     caption TEXT
+    FOREIGN KEY (trip_id) REFERENCES trips(id)
 );

@@ -14,7 +14,7 @@ CREATE TABLE trips (
     trip_type TEXT NOT NULL,
     date_created DATE,
     planned_date DATE,
-    rating INTEGER NOT NULL MIN 1 MAX 5,
+    rating INTEGER NOT NULL CHECK (rating >=1 AND rating <= 5),
     notes TEXT,
     confirmed_start_date DATE,
     confirmed_end_date DATE,

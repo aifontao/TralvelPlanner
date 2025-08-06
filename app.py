@@ -1,4 +1,4 @@
-from CS50 import SQL
+from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 
@@ -25,4 +25,4 @@ def after_request(response):
 def index():
     """Show user dashboard"""
 
-    return render_template(index.html)
+    return render_template("index.html")

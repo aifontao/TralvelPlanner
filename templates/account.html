@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Account
+{% endblock %}
+
+{% block main %}
+<h3 class="mt-4">Account</h3>
+
+<table class="table mx-auto mt-5 table-borderless" style="width: 300px">
+    {% for account in account%}
+    <tr>
+        <th scope="row">Name</th>
+        <td>{{ account.username }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<div>
+    <a class="btn btn-light" href="/password">Change Password</a>
+</div>
+
+{% endblock %}

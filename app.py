@@ -86,6 +86,48 @@ def logout():
     return redirect("/")
 
 
+@app.route("/password", methods=["GET", "POST"])
+@login_required
+def password():
+    """Change users password"""
+
+    if request.method == "POST":
+
+        # Get current password hash
+        pwhash = db.execute("SELECT hash FROM users WHERE id = ?", session["user_id"])
+        pwhash = pwhash[0]["hash"]
+
+        # Check for possible errors
+        # If the user does not input any current passord
+        current = request.form.get("current")
+        if not current or not check_password_hash(pwhash, current):
+            return apology("Current password is incorrect", 400)
+
+        # If the user doesn't type any new password
+        password = request.form.get("password")
+        if not password:
+            return apology("Missing new password", 400)
+        # or if the new password is the same as the old password
+        if check_password_hash(pwhash, password):
+            return apology("The new password must be different from the current password", 400)
+
+        # If the user doesn't type any confirmation or if it does not match the new password
+        confirmation = request.form.get("confirmation")
+        if not confirmation or password != confirmation:
+            return apology("New passwords don't match", 400)
+
+        # Hash new password
+        hash = generate_password_hash(password, method='scrypt', salt_length=16)
+        # update user password in the users dictionary
+        db.execute("UPDATE users SET hash = ? WHERE hash = ? AND id = ?",
+                   hash, pwhash, session["user_id"])
+
+        flash("Your password has been successfully changed!", "success")
+        return redirect("/account")
+
+    return render_template("password.html")
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""

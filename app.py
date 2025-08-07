@@ -36,6 +36,17 @@ def index():
     return render_template("index.html")
 
 
+@app.route("/account", methods=["GET", "POST"])
+@login_required
+def account():
+    """Show users account"""
+
+    account = db.execute(
+        "SELECT username, cash FROM users WHERE id = ?", session["user_id"])
+
+    return render_template("account.html", account=account)
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""

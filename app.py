@@ -42,7 +42,7 @@ def account():
     """Show users account"""
 
     account = db.execute(
-        "SELECT username, cash FROM users WHERE id = ?", session["user_id"])
+        "SELECT username FROM users WHERE id = ?", session["user_id"])
 
     return render_template("account.html", account=account)
 

@@ -86,5 +86,37 @@ def logout():
     return redirect("/")
 
 
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    """Register user"""
+
+    if request.method == "POST":
+
+        # Check for possible errors
+        name = request.form.get("username")
+        if not name:
+            return apology("Missing usermane", 400)
+
+        password = request.form.get("password")
+        if not password:
+            return apology("Missing password", 400)
+
+        confirmation = request.form.get("confirmation")
+        if not confirmation or password != confirmation:
+            return apology("Passwords don't match", 400)
+
+        hash = generate_password_hash(password, method='scrypt', salt_length=16)
+        # Insert the new user into users table
+        try:
+            # If username is already taken
+            db.execute("INSERT INTO users (username, hash) VALUES(?, ?)", name, hash)
+            return redirect("/")
+        except ValueError:
+            return apology("Username is already taken - choose another unsername", 400)
+
+    # Log user in
+    return render_template("register.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True)

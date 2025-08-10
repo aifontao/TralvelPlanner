@@ -33,7 +33,9 @@ def after_request(response):
 def index():
     """Show user dashboard"""
 
-    return render_template("index.html")
+    trips = db.execute("SELECT name, country, city FROM trips WHERE user_id = ?", session["user_id"])
+
+    return render_template("index.html", trips=trips)
 
 
 @app.route("/account", methods=["GET", "POST"])
@@ -47,6 +49,10 @@ def account():
     return render_template("account.html", account=account)
 
 
+import os
+print("DB path:", os.path.abspath("travel.db"))
+
+
 @app.route("/add", methods=["GET", "POST"])
 @login_required
 def add():
@@ -55,15 +61,20 @@ def add():
     if request.method == "POST":
 
         country = request.form.get("country")
-        if not country:
+        city = request.form.get("city")
+        
+        print("Form submitted with:", country, city)
+
+        if not country or not city:
             return apology("Missing country", 400)
         
-        city = request.form.get("city")
-        if not city:
-            return apology("Missing city", 400)
-
-        db.execute("INSERT INTO trips (user_id, country, name) VALUES (?, ?, ?)",
-                   session[user_id], country, city)
+        
+        try:
+            db.execute("INSERT INTO trips (user_id, country, city) VALUES (?, ?, ?)",
+                    session["user_id"], country, city)
+        except Exception as e:
+            print("DB Error:", e)
+            return apology("Database error", 500)
 
         return redirect("/")
 

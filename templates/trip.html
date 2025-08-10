@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Edit trip
+{% endblock %}
+
+{% block main %}
+<form action="/add" method="post">
+    <label>Trip name</label>
+    <input type="text" name="name" value="{{ trip.name }}" required><br>
+    
+    <label>Country</label>
+    <input type="text" name="country" value="{{ trip.country }}" required><br>
+    
+    <label>City</label>
+    <input type="text" name="city" value="{{ trip.city }}" required><br>
+    
+    <label>Status</label>
+    <input type="text" name="status" value="{{ trip.status }}"><br>
+    
+    <label>Trip Type</label>
+    <input type="text" name="trip_type" value="{{ trip.trip_type }}"><br>
+    
+    <label>Rating</label>
+    <input type="number" name="rating" value="{{ trip.rating }}" min="1" max="5"><br>
+    
+    <label>Notes</label>
+    <textarea name="notes">{{ trip.notes }}</textarea><br>
+
+    <button type="submit">Update Trip</button>
+</form>
+{% endblock %}

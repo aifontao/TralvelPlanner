@@ -198,7 +198,7 @@ def register():
 # Searched chatGPT to understand how to change the route parameter to a given trip_id
 @app.route("/trip/<int:trip_id>", methods=["GET", "POST"])
 @login_required
-def trip():
+def trip(trip_id):
 
     return render_template("trip.html")
 

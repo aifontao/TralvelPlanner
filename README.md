@@ -1,9 +1,14 @@
-# TralvelPlanner
+# Tralvel Planner
+
+#### Video Demo: TODO
+
+#### Description:
 
 TravelPlanner is a web application built with Python (Flask), HTML, CSS, and JavaScript as part of my final project for CS50x.
 It helps users organize, plan, and reflect on their past, current, and future travels.
 
-Users can: 
+Users can:
+
 - Create an account and log in to their personal dashboard
 - Add detailed trips including country, city, and trip type (holiday, work, etc.)
 - Add places to visit, food to try, and experiences to look forward to

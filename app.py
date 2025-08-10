@@ -47,6 +47,28 @@ def account():
     return render_template("account.html", account=account)
 
 
+@app.route("/add", methods=["GET", "POST"])
+@login_required
+def add():
+
+    # User reached route via POST (as by submitting a form via POST)
+    if request.method == "POST":
+
+        country = request.form.get("country")
+        if not country:
+            return apology("Missing country", 400)
+        
+        city = request.form.get("city")
+        if not city:
+            return apology("Missing city", 400)
+
+        db.execute("INSERT INTO trips (user_id, country, name) VALUES (?, ?, ?)",
+                   session[user_id], country, city)
+
+        return redirect("/")
+
+    return render_template("add.html")
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""

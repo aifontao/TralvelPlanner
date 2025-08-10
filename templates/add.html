@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add trip
+{% endblock %}
+
+{% block main %}
+<form action="/add" method="post">
+    <div class="mb-3">
+        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="country" placeholder="Country"
+            type="text">
+    </div>
+    <div class="mb-3">
+        <input class="form-control mx-auto w-auto" name="city" placeholder="City" type="text">
+    </div>
+    <button class="btn btn-primary" type="submit">Add trip</button>
+</form>
+{% endblock %}

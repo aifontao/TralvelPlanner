@@ -200,7 +200,30 @@ def register():
 @login_required
 def trip(trip_id):
 
-    return render_template("trip.html")
+    # Handle form submission for editing
+    if request.method == "POST":
+        name = request.form.get("name")
+        country = request.form.get("country")
+        city = request.form.get("city")
+        notes = request.form.get("notes")
+        trip_type = request.form.get("trip_type")
+        status = request.form.get("status")
+        rating = request.form.get("rating")
+
+        if not name or not country or not city:
+            return apology("Missing required fields", 400)
+        
+        db.execute("UPDATE trips SET name = ?, country = ?, city = ?, notes = ?, trip_type = ?, status = ?, rating = ? WHERE id = ? AND user_id = ?", name, country, city, notes, trip_type, status, rating, trip_id, session["user_id"])
+
+        flash("Trip updated successfully! ☺️")
+        return redirect(f"/trip/{trip_id}")
+
+    # On GET - show trip details
+    trip = db.execute("SELECT * FROM trips WHERE id = ? AND user_id = ?", trip_id, session["user_id"])
+    if not trip:
+        return apology("Trip not found", 404)
+    
+    return render_template("trip.html", trip=trip[0])
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -63,19 +63,13 @@ def add():
         country = request.form.get("country")
         city = request.form.get("city")
         
-        print("Form submitted with:", country, city)
-
         if not country or not city:
             return apology("Missing country", 400)
         
         
-        try:
-            db.execute("INSERT INTO trips (user_id, country, city) VALUES (?, ?, ?)",
-                    session["user_id"], country, city)
-        except Exception as e:
-            print("DB Error:", e)
-            return apology("Database error", 500)
-
+        db.execute("INSERT INTO trips (user_id, country, city) VALUES (?, ?, ?)", 
+                   session["user_id"], country, city)
+        
         return redirect("/")
 
     return render_template("add.html")

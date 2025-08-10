@@ -17,7 +17,7 @@
                 {% endif %}
                 <h3>{{ trip.country }}</h3>
                 <h6>{{ trip.city }}</h6>
-                <a href="#" class="btn btn-primary">View Trip</a>
+                <a href="/trip/{{ trip.id }}" class="btn btn-primary">View Trip</a>
             </div>
         </div>
         {% endfor %}

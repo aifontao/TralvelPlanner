@@ -33,7 +33,7 @@ def after_request(response):
 def index():
     """Show user dashboard"""
 
-    trips = db.execute("SELECT name, country, city FROM trips WHERE user_id = ?", session["user_id"])
+    trips = db.execute("SELECT id, name, country, city FROM trips WHERE user_id = ?", session["user_id"])
 
     return render_template("index.html", trips=trips)
 
@@ -47,10 +47,6 @@ def account():
         "SELECT username FROM users WHERE id = ?", session["user_id"])
 
     return render_template("account.html", account=account)
-
-
-import os
-print("DB path:", os.path.abspath("travel.db"))
 
 
 @app.route("/add", methods=["GET", "POST"])
@@ -73,6 +69,7 @@ def add():
         return redirect("/")
 
     return render_template("add.html")
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -197,6 +194,13 @@ def register():
     # Log user in
     return render_template("register.html")
 
+
+# Searched chatGPT to understand how to change the route parameter to a given trip_id
+@app.route("/trip/<int:trip_id>", methods=["GET", "POST"])
+@login_required
+def trip():
+
+    return render_template("trip.html")
 
 if __name__ == "__main__":
     app.run(debug=True)

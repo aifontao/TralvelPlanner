@@ -73,9 +73,11 @@ def add():
         if not country or not city:
             return apology("Missing country", 400)
         
-        
-        db.execute("INSERT INTO trips (user_id, country, city) VALUES (?, ?, ?)", 
+        try:
+            db.execute("INSERT INTO trips (user_id, country, city) VALUES (?, ?, ?)", 
                    session["user_id"], country, city)
+        except:
+            return apology("Failed to add trip")
         
         return redirect("/")
 

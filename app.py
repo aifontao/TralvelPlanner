@@ -132,6 +132,7 @@ def edit(trip_id):
         if not rating:
             rating = None
 
+        # Add details to trips
         db.execute("UPDATE trips SET name = ?, country = ?, city = ?, notes = ?, trip_type = ?, status = ?, rating = ? WHERE id = ? AND user_id = ?", name, country, city, notes, trip_type, status, rating, trip_id, session["user_id"])
 
         flash("Trip updated successfully! ☺️")

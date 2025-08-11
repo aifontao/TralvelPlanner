@@ -16,16 +16,16 @@
     <input type="text" name="city" value="{{ trip.city }}" required><br>
 
     <label>Status</label>
-    <input type="text" name="status" value="{{ trip.status }}"><br>
+    <input type="text" name="status" value="{{ trip.status or '' }}"><br>
 
     <label>Trip Type</label>
-    <input type="text" name="trip_type" value="{{ trip.trip_type }}"><br>
+    <input type="text" name="trip_type" value="{{ trip.trip_type or '' }}"><br>
 
     <label>Rating</label>
-    <input type="number" name="rating" value="{{ trip.rating }}"><br>
+    <input type="number" name="rating" min="1" max="5" value="{{ trip.rating or '' }}"><br>
 
     <label>Notes</label>
-    <textarea name="notes">{{ trip.notes }}</textarea><br>
+    <textarea name="notes">{{ trip.notes or '' }}</textarea><br>
 
     <button type="submit">Update Trip</button>
 </form>

@@ -33,11 +33,9 @@
                         Trips
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Scheduled</a></li>
-                        <li><a class="dropdown-item" href="#">Planning</a></li>
-                        <li><a class="dropdown-item" href="#">Ongoing</a></li>
-                        <li><a class="dropdown-item" href="#">Completed</a></li>
-                        <li><a class="dropdown-item" href="#">Wishlist</a></li>
+                        {% for trip in trips %}
+                            <li><a class="dropdown-item" href="#">{{ trip.country}} - {{ trip.city }}</a></li>
+                        {% endfor %}
                         <li>
                             <hr class="dropdown-divider">
                         </li>

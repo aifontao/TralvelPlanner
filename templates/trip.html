@@ -13,4 +13,32 @@
     <h6>Photo</h6>
     <p>Other</p>
     <a href="/edit/{{ trip.id }}" class="btn btn-primary">Edit Trip</a>
+    
+    <!-- Prompt user if they are sure that they want to delete trip -->
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal{{ trip.id }}">
+        Delete Trip 
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal{{ trip.id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ trip.id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete trip</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this trip?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <form method="POST" action="/delete/{{ trip.id }}">
+                        <button type="submit" class="btn btn-danger">Confirm Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 {% endblock %}

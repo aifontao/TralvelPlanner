@@ -216,7 +216,7 @@ def password():
         # If the user doesn't type any new password
         password = request.form.get("password")
         if not password:
-            return apology("Missing new password", 400)
+            return apology("Please enter new password", 400)
         # or if the new password is the same as the old password
         if check_password_hash(pwhash, password):
             return apology("The new password must be different from the current password", 400)
@@ -224,7 +224,7 @@ def password():
         # If the user doesn't type any confirmation or if it does not match the new password
         confirmation = request.form.get("confirmation")
         if not confirmation or password != confirmation:
-            return apology("New passwords don't match", 400)
+            return apology("Password confirmation does not match", 400)
 
         # Hash new password
         hash = generate_password_hash(password, method='scrypt', salt_length=16)

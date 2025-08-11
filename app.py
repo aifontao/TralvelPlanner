@@ -19,6 +19,17 @@ Session(app)
 db = SQL("sqlite:///travel.db")
 
 
+# Searched chatGPT on how to use Context Processor so that the trips are available globally
+@app.context_processor
+def inject_trips():
+    # If user is not logger in, return and empty dict
+    if "user_id" not in session:
+        return {}
+    # Otherwise, return all trips for the logged-in user
+    user_trips = db.execute("SELECT id, name, country, city FROM trips WHERE user_id = ?", session["user_id"])
+    return {"trips": user_trips}
+
+
 @app.after_request
 def after_request(response):
     """Ensure responses aren't cached"""

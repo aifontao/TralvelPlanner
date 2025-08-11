@@ -34,7 +34,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         {% for trip in trips %}
-                            <li><a class="dropdown-item" href="#">{{ trip.country}} - {{ trip.city }}</a></li>
+                            <li><a class="dropdown-item" href="/trip/{{ trip.id }}">{{ trip.country}} - {{ trip.city }}</a></li>
                         {% endfor %}
                         <li>
                             <hr class="dropdown-divider">

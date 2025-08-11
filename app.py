@@ -82,6 +82,24 @@ def add():
     return render_template("add.html")
 
 
+@app.route("/delete/<int:trip_id>", methods=["GET", "POST"])
+@login_required
+def delete(trip_id):
+
+    if request.method == "POST":
+
+        # If the user confirms they want to delete trip
+        
+        # Check if trip exists for this user
+        trip = db.execute("SELECT * FROM trips WHERE id = ? AND user_id = ?", trip_id, session["user_id"])
+        if not trip:
+            return apology("Trip not found or unauthorized")
+
+        db.execute("DELETE FROM trips WHERE id = ? AND user_id = ?", trip_id, session["user_id"])            
+        flash("Trip deleted successfully!")
+        return redirect("/")
+        
+
 # Searched chatGPT to understand how to change the route parameter to a given trip_id
 @app.route("/edit/<int:trip_id>", methods=["GET", "POST"])
 @login_required

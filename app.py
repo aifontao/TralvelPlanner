@@ -71,6 +71,37 @@ def add():
     return render_template("add.html")
 
 
+# Searched chatGPT to understand how to change the route parameter to a given trip_id
+@app.route("/edit/<int:trip_id>", methods=["GET", "POST"])
+@login_required
+def edit(trip_id):
+
+    # Handle form submission for editing
+    if request.method == "POST":
+        name = request.form.get("name")
+        country = request.form.get("country")
+        city = request.form.get("city")
+        notes = request.form.get("notes")
+        trip_type = request.form.get("trip_type")
+        status = request.form.get("status")
+        rating = request.form.get("rating")
+
+        if not name or not country or not city:
+            return apology("Missing required fields", 400)
+        
+        db.execute("UPDATE trips SET name = ?, country = ?, city = ?, notes = ?, trip_type = ?, status = ?, rating = ? WHERE id = ? AND user_id = ?", name, country, city, notes, trip_type, status, rating, trip_id, session["user_id"])
+
+        flash("Trip updated successfully! ☺️")
+        return redirect(f"/trip/{trip_id}")
+
+    # On GET - show trip details
+    trip = db.execute("SELECT * FROM trips WHERE id = ? AND user_id = ?", trip_id, session["user_id"])
+    if not trip:
+        return apology("Trip not found", 404)
+    
+    return render_template("edit.html", trip=trip[0])
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""
@@ -196,27 +227,9 @@ def register():
 
 
 # Searched chatGPT to understand how to change the route parameter to a given trip_id
-@app.route("/trip/<int:trip_id>", methods=["GET", "POST"])
+@app.route("/trip/<int:trip_id>", methods=["GET"])
 @login_required
 def trip(trip_id):
-
-    # Handle form submission for editing
-    if request.method == "POST":
-        name = request.form.get("name")
-        country = request.form.get("country")
-        city = request.form.get("city")
-        notes = request.form.get("notes")
-        trip_type = request.form.get("trip_type")
-        status = request.form.get("status")
-        rating = request.form.get("rating")
-
-        if not name or not country or not city:
-            return apology("Missing required fields", 400)
-        
-        db.execute("UPDATE trips SET name = ?, country = ?, city = ?, notes = ?, trip_type = ?, status = ?, rating = ? WHERE id = ? AND user_id = ?", name, country, city, notes, trip_type, status, rating, trip_id, session["user_id"])
-
-        flash("Trip updated successfully! ☺️")
-        return redirect(f"/trip/{trip_id}")
 
     # On GET - show trip details
     trip = db.execute("SELECT * FROM trips WHERE id = ? AND user_id = ?", trip_id, session["user_id"])
@@ -224,6 +237,7 @@ def trip(trip_id):
         return apology("Trip not found", 404)
     
     return render_template("trip.html", trip=trip[0])
+
 
 if __name__ == "__main__":
     app.run(debug=True)

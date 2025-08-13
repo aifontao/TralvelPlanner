@@ -136,18 +136,20 @@ def edit(trip_id):
 
         if not name or not country or not city:
             return apology("Missing required fields", 400)
-        
+            
         if not notes:
             notes = None
         
         if not trip_type:
             trip_type = None
-
-        if not status:
-            status = None
         
         if not rating:
             rating = None
+
+        # TODO
+        # status = status if status else None
+        if not status:
+            status = None
 
         # Add details to trips
         db.execute("UPDATE trips SET name = ?, country = ?, city = ?, notes = ?, trip_type = ?, status = ?, rating = ? WHERE id = ? AND user_id = ?", name, country, city, notes, trip_type, status, rating, trip_id, session["user_id"])

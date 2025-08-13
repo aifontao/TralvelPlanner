@@ -79,11 +79,19 @@ def add():
 
         country = request.form.get("country")
         city = request.form.get("city")
+        # Add status # Get the selected status
+        # Add trip type
         
         if not country or not city:
             return apology("Missing country", 400)
+
+        # Set a default status if not provided
+        # Set a default type if not provided
         
         try:
+            # TODO:
+            # Add status and trip type
+            # Save creation date of the trip -- copy finance
             db.execute("INSERT INTO trips (user_id, country, city) VALUES (?, ?, ?)", 
                    session["user_id"], country, city)
         except:
@@ -101,7 +109,6 @@ def delete(trip_id):
     if request.method == "POST":
 
         # If the user confirms they want to delete trip
-        
         # Check if trip exists for this user
         trip = db.execute("SELECT * FROM trips WHERE id = ? AND user_id = ?", trip_id, session["user_id"])
         if not trip:

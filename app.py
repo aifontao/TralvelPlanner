@@ -1,3 +1,5 @@
+import datetime
+
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
@@ -82,21 +84,21 @@ def add():
 
         country = request.form.get("country")
         city = request.form.get("city")
-        # Add status # Get the selected status
-        # Add trip type
-        
+        status = request.form.get("status")
+        type = request.form.get("type")
+            
         if not country or not city:
             return apology("Missing country", 400)
 
         # Set a default status if not provided
-        # Set a default type if not provided
-        
+        status = STATUS[3] if status else None
+                    
         try:
             # TODO:
-            # Add status and trip type
+            
             # Save creation date of the trip -- copy finance
-            db.execute("INSERT INTO trips (user_id, country, city) VALUES (?, ?, ?)", 
-                   session["user_id"], country, city)
+            db.execute("INSERT INTO trips (user_id, country, city, statys, trip_type, date_created) VALUES (?, ?, ?, ?, ?, ?)", 
+                   session["user_id"], country, city, status, type, datetime.datetime.now())
         except:
             return apology("Failed to add trip")
         
@@ -143,16 +145,10 @@ def edit(trip_id):
         if not notes:
             notes = None
         
-        if not trip_type:
-            trip_type = None
-        
         if not rating:
             rating = None
 
-        # TODO
-        # status = status if status else None
-        if not status:
-            status = None
+        status = status if status else None
 
         # Add details to trips
         db.execute("UPDATE trips SET name = ?, country = ?, city = ?, notes = ?, trip_type = ?, status = ?, rating = ? WHERE id = ? AND user_id = ?", name, country, city, notes, trip_type, status, rating, trip_id, session["user_id"])

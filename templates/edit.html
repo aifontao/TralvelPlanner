@@ -15,11 +15,23 @@
     <label>City</label>
     <input type="text" name="city" value="{{ trip.city }}" required><br>
 
-    <label>Status</label>
-    <input type="text" name="status" value="{{ trip.status or '' }}"><br>
-
+    <label for="status">Status</label>
+    <!-- <input type="text" name="status" value="{{ trip.status or '' }}">  -->
+    <select name="status" id="status">
+        <option disabled selected value="">Select Status</option>
+            {% for status_option in status %}
+                <option value="{{ status_option }}" {% if status_option == trip.status %} selected {% endif %}>{{ status_option }}</option>
+            {% endfor %}
+    </select>
+    
     <label>Trip Type</label>
-    <input type="text" name="trip_type" value="{{ trip.trip_type or '' }}"><br>
+    <!-- <input type="text" name="trip_type" value="{{ trip.trip_type or '' }}"> -->
+    <select name="type">
+        <option disabled selected value="">Trip Type</option>
+            {% for type in types %}
+                <option value="{{ trip.type or '' }}">{{ type }}</option>
+            {% endfor %}
+    </select>
 
     <label>Rating</label>
     <input type="number" name="rating" min="1" max="5" value="{{ trip.rating or '' }}"><br>

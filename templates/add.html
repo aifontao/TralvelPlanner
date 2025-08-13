@@ -13,6 +13,23 @@
     <div class="mb-3">
         <input class="form-control mx-auto w-auto" name="city" placeholder="City" type="text">
     </div>
+
+    <label for="status">Status</label>
+    <select name="status" id="status">
+        <option disabled selected value="">Select Status</option>
+        {% for status_option in status %}
+            <option value="{{ status_option }}">{{ status_option }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="type">Trip types</label>
+    <select name="type" id="type">
+        <option disabled selected value="">Select Trip Types</option>
+        {% for type in types %}
+            <option value="{{ type }}">{{ type }}</option>
+        {% endfor %}
+    </select>
+    
     <button class="btn btn-primary" type="submit">Add trip</button>
 </form>
 {% endblock %}

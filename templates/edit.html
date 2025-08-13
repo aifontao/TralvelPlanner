@@ -5,40 +5,58 @@
 {% endblock %}
 
 {% block main %}
-<form action="/edit/{{ trip.id }}" method="post">
-    <label>Trip name</label>
-    <input type="text" name="name" value="{{ trip.name }}" required><br>
 
-    <label>Country</label>
-    <input type="text" name="country" value="{{ trip.country }}" required><br>
+    <form action="/edit/{{ trip.id }}" method="post" class="container">
 
-    <label>City</label>
-    <input type="text" name="city" value="{{ trip.city }}" required><br>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Trip name</span>
+            <input type="text" class="form-control" name="name" value="{{ trip.name }}" required>
+        </div>
 
-    <label for="status">Status</label>
-    <!-- <input type="text" name="status" value="{{ trip.status or '' }}">  -->
-    <select name="status" id="status">
-        <option disabled selected value="">Select Status</option>
-            {% for status_option in status %}
+        <div class="input-group mb-3">
+            <span class="input-group-text">Country</span>
+            <input type="text" class="form-control" name="country" value="{{ trip.country }}" required>
+        </div>
+        
+        <div class="input-group mb-3">
+            <span class="input-group-text">City</span>
+            <input type="text" class="form-control" name="city" value="{{ trip.city }}" required>
+        </div>
+        
+        <div class="input-group mb-3">
+            <span class="input-group-text">Status</span>
+            <input type="text" class="form-control" name="status" value="{{ trip.status }}" required>
+            <select class="form-select" name="status">
+                <option disabled selected value="">Change Status</option>
+                {% for status_option in status %}
                 <option value="{{ status_option }}" {% if status_option == trip.status %} selected {% endif %}>{{ status_option }}</option>
-            {% endfor %}
-    </select>
-    
-    <label>Trip Type</label>
-    <!-- <input type="text" name="trip_type" value="{{ trip.trip_type or '' }}"> -->
-    <select name="type">
-        <option disabled selected value="">Trip Type</option>
-            {% for type in types %}
-                <option value="{{ trip.type or '' }}">{{ type }}</option>
-            {% endfor %}
-    </select>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="input-group mb-3">
+            <span class="input-group-text">Trip type</span>
+            <input type="text" class="form-control" name="trip_type" value="{{ trip.trip_type }}" required>
+            <select class="form-select" name="type">
+                <option disabled selected value="">Trip Type</option>
+                    {% for type in types %}
+                        <option value="{{ trip.type or '' }}">{{ type }}</option>
+                    {% endfor %}
+            </select>
+        </div>
+        
+        <div class="input-group mb-3">
+            <span class="input-group-text">Rating</span>
+            <input type="number" class="form-control" name="rating" min="1" max="5" value="{{ trip.rating or '' }}"><br>
+        </div>
+        
+        <div class="form-floating mb-3">
+            <textarea class="form-control" name="notes" placeholder="Notes">{{ trip.notes }}</textarea><br>
+            <label for="floatingTextarea">Notes</label>
+        </div>
 
-    <label>Rating</label>
-    <input type="number" name="rating" min="1" max="5" value="{{ trip.rating or '' }}"><br>
+        <button class="btn btn-outline-secondary" type="submit">Update Trip</button>
 
-    <label>Notes</label>
-    <textarea name="notes">{{ trip.notes or '' }}</textarea><br>
+    </form>
 
-    <button type="submit">Update Trip</button>
-</form>
 {% endblock %}

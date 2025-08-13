@@ -25,7 +25,6 @@
         
         <div class="input-group mb-3">
             <span class="input-group-text">Status</span>
-            <input type="text" class="form-control" name="status" value="{{ trip.status }}" required>
             <select class="form-select" name="status">
                 <option disabled selected value="">Change Status</option>
                 {% for status_option in status %}
@@ -36,7 +35,6 @@
         
         <div class="input-group mb-3">
             <span class="input-group-text">Trip type</span>
-            <input type="text" class="form-control" name="trip_type" value="{{ trip.trip_type }}" required>
             <select class="form-select" name="type">
                 <option disabled selected value="">Trip Type</option>
                     {% for type in types %}
@@ -47,7 +45,7 @@
         
         <div class="input-group mb-3">
             <span class="input-group-text">Rating</span>
-            <input type="number" class="form-control" name="rating" min="1" max="5" value="{{ trip.rating or '' }}"><br>
+            <input type="number" class="form-control" name="rating" min="1" max="5" value="{{ trip.rating or '' }}">
         </div>
         
         <div class="form-floating mb-3">

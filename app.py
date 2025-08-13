@@ -15,6 +15,11 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+STATUS = ["Visited", "Ongoing", "Scheduled", "Planning", "Wishlist"]
+TYPES = ["Holiday", "Adventure", "Romantic", "Solo", "Work"]
+RELANTIONSHIP = ["Family", "Partner", "Friend", "Coworker"]
+EXPERIENCES = ["Activity", "Place", "Food"]
+
 # Configure CS50 library to use SQLite database
 db = SQL("sqlite:///travel.db")
 
@@ -27,7 +32,12 @@ def inject_trips():
         return {}
     # Otherwise, return all trips for the logged-in user
     user_trips = db.execute("SELECT id, name, country, city FROM trips WHERE user_id = ?", session["user_id"])
-    return {"trips": user_trips}
+    
+    # Define status options (for dropdown)
+    status = STATUS
+
+    # Return the data to be available globally in templates
+    return {"trips": user_trips, "status": status}
 
 
 @app.after_request

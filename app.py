@@ -107,9 +107,14 @@ def add():
     return render_template("add.html")
 
 
-@app.route("/trips", methods=["GET", "POST"])
+@app.route("/buddies/<int:trip_id>", methods=["GET", "POST"])
 @login_required
 def add_buddies():
+
+    if request.method = "POST":
+        #TODO
+    #TODO        
+
 
 @app.route("/delete/<int:trip_id>", methods=["POST"])
 @login_required

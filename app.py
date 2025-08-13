@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
@@ -82,26 +82,26 @@ def add():
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
-        country = request.form.get("country")
-        city = request.form.get("city")
-        status = request.form.get("status")
-        type = request.form.get("type")
+        name = None
+        country = request.form.get("country").strip()
+        city = request.form.get("city").strip()
+        status = request.form.get("status") or None
+        trip_type = request.form.get("type") or None
             
         if not country or not city:
-            return apology("Missing country", 400)
+            return apology("Missing country or city", 400)
 
-        # Set a default status if not provided
-        status = STATUS[3] if status else None
-                    
+        now = datetime.now().strftime('%Y-%m-%d')
+
         try:
-            # TODO:
-            
-            # Save creation date of the trip -- copy finance
-            db.execute("INSERT INTO trips (user_id, country, city, statys, trip_type, date_created) VALUES (?, ?, ?, ?, ?, ?)", 
-                   session["user_id"], country, city, status, type, datetime.datetime.now())
-        except:
+            db.execute(
+                "INSERT INTO trips (user_id, name, country, city, status, trip_type, date_created) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                session["user_id"], name, country, city, status, trip_type, now
+            )
+        except Exception as e:
+            print("Database insert error:", e)
             return apology("Failed to add trip")
-        
+
         return redirect("/")
 
     return render_template("add.html")

@@ -33,11 +33,14 @@ def inject_trips():
     # Otherwise, return all trips for the logged-in user
     user_trips = db.execute("SELECT id, name, country, city FROM trips WHERE user_id = ?", session["user_id"])
     
-    # Define status options (for dropdown)
+    # Define status, types, relationship and experiences options (for dropdown)
     status = STATUS
+    types = TYPES
+    relationship = RELANTIONSHIP
+    experiences = EXPERIENCES
 
     # Return the data to be available globally in templates
-    return {"trips": user_trips, "status": status}
+    return {"trips": user_trips, "status": status, "types": types, "relationship": relationship, "experiences": experiences}
 
 
 @app.after_request

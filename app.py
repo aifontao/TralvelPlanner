@@ -107,7 +107,11 @@ def add():
     return render_template("add.html")
 
 
-@app.route("/delete/<int:trip_id>", methods=["GET", "POST"])
+@app.route("/trips", methods=["GET", "POST"])
+@login_required
+def add_buddies():
+
+@app.route("/delete/<int:trip_id>", methods=["POST"])
 @login_required
 def delete(trip_id):
 
@@ -134,21 +138,16 @@ def edit(trip_id):
         name = request.form.get("name")
         country = request.form.get("country")
         city = request.form.get("city")
-        notes = request.form.get("notes")
-        trip_type = request.form.get("trip_type")
         status = request.form.get("status")
-        rating = request.form.get("rating")
+        trip_type = request.form.get("trip_type")
+        rating = request.form.get("rating") or None
+        notes = request.form.get("notes") or None
 
         if not name or not country or not city:
             return apology("Missing required fields", 400)
             
-        if not notes:
-            notes = None
-        
-        if not rating:
-            rating = None
-
-        status = status if status else None
+        if not status or not trip_type:
+            return apology("Missing status or trip types", 400)
 
         # Add details to trips
         db.execute("UPDATE trips SET name = ?, country = ?, city = ?, notes = ?, trip_type = ?, status = ?, rating = ? WHERE id = ? AND user_id = ?", name, country, city, notes, trip_type, status, rating, trip_id, session["user_id"])

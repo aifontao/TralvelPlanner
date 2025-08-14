@@ -9,8 +9,10 @@
     <form action="/edit/{{ trip.id }}" method="post" class="container">
 
         <div class="input-group mb-3">
-            <span class="input-group-text">Trip name</span>
-            <input type="text" class="form-control" name="name" value="{{ trip.name }}" required>
+            <div class="form-floating">
+                <input type="text" class="form-control" id="floatingInput" name="name" value="{{ trip.name or '' }}" placeholder="{{ trip.name or 'Insert trip name'}}" required>
+                <label for="floatingInput">Insert or update trip name</label>
+            </div>
         </div>
 
         <div class="input-group mb-3">

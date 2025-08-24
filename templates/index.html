@@ -15,9 +15,9 @@
                 {% if trip.name%}
                     <h5 class="card-title">{{ trip.name }}</h5>
                 {% endif %}
-                <h3>{{ trip.country }}</h3>
-                <h6>{{ trip.city }}</h6>
-                <a href="/trip/{{ trip.id }}" class="btn btn-primary">View Trip</a>
+                <h3 class="m-3">{{ trip.country }}</h3>
+                <h6 class="m-3">{{ trip.city }}</h6>
+                <a href="/trip/{{ trip.id }}" class="btn btn-primary mt-3">View Trip</a>
             </div>
         </div>
         {% endfor %}

@@ -107,11 +107,11 @@ def add():
     return render_template("add.html")
 
 
-@app.route("/buddies/<int:trip_id>", methods=["GET", "POST"])
-@login_required
-def add_buddies():
+#@app.route("/buddies/<int:trip_id>", methods=["GET", "POST"])
+#@login_required
+#def add_buddies():
 
-    if request.method = "POST":
+    #if request.method == "POST":
         #TODO
     #TODO        
 

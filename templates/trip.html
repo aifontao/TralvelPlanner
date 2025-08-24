@@ -5,14 +5,25 @@
 {% endblock %}
 
 {% block main %}
-    {% if trip.name %}
-        <h1>{{ trip.name }}</h1>
-    {% endif %}
-    <h2>{{ trip.country }}</h2>
-    <h3>{{ trip.city }}</h3>
-    <h6>Photo</h6>
-    <p>Other</p>
-    <a href="/edit/{{ trip.id }}" class="btn btn-primary">Edit Trip</a>
+    <div class="container">
+        <div class="d-flex align-items-start mb-4">
+            {% if trip.name %}
+                <h1>{{ trip.name }}</h1>
+            {% endif %}
+        </div>
+        <div class="d-flex align-items-start">
+            <h2>📍 {{ trip.country }} - {{ trip.city }}</h2>
+        </div>
+        <div class="d-flex align-items-start">
+            <h6>Photo</h6>
+        </div>
+        <div class="d-flex align-items-start">
+            <p>Other</p>
+        </div>
+        <div class="d-flex align-items-start">
+            <a href="/edit/{{ trip.id }}" class="btn btn-primary">Edit Trip</a>
+        </div>
+    </div>
     
     <!-- Prompt user if they are sure that they want to delete trip -->
     <!-- Button trigger modal -->

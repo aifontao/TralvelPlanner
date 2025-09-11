@@ -29,7 +29,7 @@ db = SQL("sqlite:///travel.db")
 # Searched chatGPT on how to use Context Processor so that the trips are available globally
 @app.context_processor
 def inject_trips():
-    # If user is not logger in, return and empty dict
+    # If user is not logged in, return and empty dict
     if "user_id" not in session:
         return {}
     # Otherwise, return all trips for the logged-in user
@@ -107,13 +107,36 @@ def add():
     return render_template("add.html")
 
 
-#@app.route("/buddies/<int:trip_id>", methods=["GET", "POST"])
-#@login_required
-#def add_buddies():
+@app.route("/buddies/<int:trip_id>", methods=["GET", "POST"])
+@login_required
+def add_buddies(trip_id):
+    
+    if request.method == "POST":
+        name = request.form.get("name") 
+        relationship = request.form.get("")
+        
+    
+        if not name or not relationship:
+                return apology("Missing Buddie name or relationship", 400)
 
-    #if request.method == "POST":
-        #TODO
-    #TODO        
+        try:
+            db.execute(
+                "INSERT INTO buddies (trip_id, name, relationship_type) VALUES (?, ?, ?)",
+                trip_id, name, relationship
+            )
+        except Exception as e:
+            print("Database insert error:", e)
+            return apology("Failed to add buddie")
+        
+        return redirect(f"/trip/{trip_id}")
+
+    trip_data = db.execute(
+        "SELECT * FROM trips WHERE id = ? AND user_id = ?", trip_id, session["user_id"]
+    )
+    if not trip_data:
+        return apology("Trip not found", 404)
+        
+    return render_template("buddies.html", trip=trip_data[0])
 
 
 @app.route("/delete/<int:trip_id>", methods=["POST"])
@@ -121,7 +144,6 @@ def add():
 def delete(trip_id):
 
     if request.method == "POST":
-
         # If the user confirms they want to delete trip
         # Check if trip exists for this user
         trip = db.execute("SELECT * FROM trips WHERE id = ? AND user_id = ?", trip_id, session["user_id"])
@@ -144,7 +166,7 @@ def edit(trip_id):
         country = request.form.get("country")
         city = request.form.get("city")
         status = request.form.get("status")
-        trip_type = request.form.get("trip_type")
+        trip_type = request.form.get("type")
         rating = request.form.get("rating") or None
         notes = request.form.get("notes") or None
 
@@ -161,11 +183,11 @@ def edit(trip_id):
         return redirect(f"/trip/{trip_id}")
 
     # On GET - show trip details
-    trip = db.execute("SELECT * FROM trips WHERE id = ? AND user_id = ?", trip_id, session["user_id"])
-    if not trip:
+    trip_data = db.execute("SELECT * FROM trips WHERE id = ? AND user_id = ?", trip_id, session["user_id"])
+    if not trip_data:
         return apology("Trip not found", 404)
     
-    return render_template("edit.html", trip=trip[0])
+    return render_template("edit.html", trip=trip_data[0])
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -295,7 +317,7 @@ def register():
 # Searched chatGPT to understand how to change the route parameter to a given trip_id
 @app.route("/trip/<int:trip_id>", methods=["GET"])
 @login_required
-def trip(trip_id):
+def view_trip(trip_id):
 
     # On GET - show trip details
     trip = db.execute("SELECT * FROM trips WHERE id = ? AND user_id = ?", trip_id, session["user_id"])

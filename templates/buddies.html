@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Add trip
+{% endblock %}
+
+{% block main %}
+
+<form action="/add" method="post" class="container">
+
+    <div class="d-flex align-items-start mb-4">
+        <h2>📍 {{ trip.country }} - {{ trip.city }}</h2>
+    </div>
+
+    <div class="input-group mb-3">
+        <span class="input-group-text">Buddie</span>
+        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="name" placeholder="Insert buddie name"
+            type="text">
+    </div>
+
+    <div class="row mb-3">
+        <div class="col">
+            <div class="input-group">
+                <label class="input-group-text">Relationship type</label>
+                <select class="form-select" name="relationship" id="relationship">
+                    <option disabled selected value="">Select...</option>
+                    {% for relationship_type in relationship %}
+                        <option value="{{ relationship_type }}">{{ relationship_type }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-outline-secondary mt-4 text-align-start" type="submit">Add buddie</button>
+
+</form>
+
+{% endblock %}

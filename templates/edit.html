@@ -10,7 +10,7 @@
 
         <div class="input-group mb-3">
             <div class="form-floating">
-                <input type="text" class="form-control" id="floatingInput" name="name" value="{{ trip.name or '' }}" placeholder="{{ trip.name or 'Insert trip name'}}" required>
+                <input type="text" class="form-control" name="name" value="{{ trip.name or '' }}" placeholder="{{ trip.name or 'Insert trip name'}}" required>
                 <label for="floatingInput">Insert or update trip name</label>
             </div>
         </div>
@@ -18,14 +18,14 @@
         <div class="row mb-3">
             <div class="col">
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingInput" name="country" value="{{ trip.country }}" required>
+                    <input type="text" class="form-control" name="country" value="{{ trip.country }}" required>
                     <label for="floatingInput">Edit or update Country</label>
                 </div>
             </div>
             
             <div class="col">
                 <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingInput" name="city" value="{{ trip.city }}" required>
+                    <input type="text" class="form-control" name="city" value="{{ trip.city }}" required>
                     <label for="floatingInput">Edit or update City</label>
                 </div>
             </div>
@@ -36,10 +36,10 @@
             <div class="col">
                 <div class="input-group">
                     <div class="input-group-text">Status</div>
-                    <select class="form-select" name="status">
+                    <select class="form-select" name="status" required>
                         <option disabled selected value="{{ trip.status }}">Change Status</option>
                         {% for status_option in status %}
-                        <option value="{{ status_option }}" {% if status_option == trip.status %} selected {% endif %}>{{ status_option }}</option>
+                        <option value="{{ status_option }}" {% if trip.status==status_option %}selected{% endif %}>{{ status_option }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -48,10 +48,10 @@
             <div class="col">
                 <div class="input-group">
                     <div class="input-group-text">Trip type</div>
-                    <select class="form-select" name="type">
+                    <select class="form-select" name="type" required>
                         <option disabled selected value="{{ trip.trip_type }}">Trip Type</option>
-                            {% for type in types %}
-                                <option value="{{ trip.type or '' }}">{{ type }}</option>
+                            {% for type_option in types %}
+                            <option value="{{ type_option }}" {% if trip.trip_type==type_option %}selected{% endif %}>{{ type_option }}</option>
                             {% endfor %}
                     </select>
                 </div>

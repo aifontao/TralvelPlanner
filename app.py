@@ -114,8 +114,7 @@ def add_buddies(trip_id):
     if request.method == "POST":
         name = request.form.get("name") 
         relationship = request.form.get("")
-        
-    
+            
         if not name or not relationship:
                 return apology("Missing Buddie name or relationship", 400)
 
@@ -325,7 +324,6 @@ def view_trip(trip_id):
         return apology("Trip not found", 404)
     
     return render_template("trip.html", trip=trip[0])
-
 
 if __name__ == "__main__":
     app.run(debug=True)

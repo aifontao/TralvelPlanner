@@ -108,27 +108,26 @@ def add():
     return render_template("add.html")
 
 
-@app.route("/buddies/<int:trip_id>", methods=["GET", "POST"])
+@app.route("/trip/<int:trip_id>/add_buddy", methods=["GET", "POST"])
 @login_required
-def add_buddie(trip_id):
-    
+def add_buddy(trip_id):
     if request.method == "POST":
-        name = request.form.get("name") 
+        buddy_name = request.form.get("buddy_name", "").strip() 
         relationship = request.form.get("relationship")
-            
-        if not name or not relationship:
-                return apology("Missing Buddie name or relationship", 400)
+                
+        if not buddy_name or not relationship:
+            return apology("Missing buddy name or relationship", 400)
 
         try:
             db.execute(
                 "INSERT INTO buddies (trip_id, name, relationship_type) VALUES (?, ?, ?)",
-                trip_id, name, relationship
-            )
+                trip_id, buddy_name, relationship
+                )
+            flash("Buddy added successfully!")
         except Exception as e:
-            print("Database insert error:", e)
-            return apology("Failed to add buddie")
-        
-        flash("Buddie added successfully! ☺️")
+            print("[ERROR] Failed to add buddy:", e)
+            return apology("Failed to add buddy", 500)
+             
         return redirect(f"/trip/{trip_id}")
 
     trip_data = db.execute(
@@ -137,7 +136,7 @@ def add_buddie(trip_id):
     if not trip_data:
         return apology("Trip not found", 404)
         
-    return render_template("buddies.html", trip=trip_data[0])
+    return render_template("add_buddy.html", trip=trip_data[0])
 
 
 @app.route("/delete/<int:trip_id>", methods=["POST"])

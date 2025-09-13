@@ -10,23 +10,23 @@
 
         <div class="input-group mb-3">
             <div class="form-floating">
-                <input type="text" class="form-control" name="name" value="{{ trip.name or '' }}" placeholder="{{ trip.name or 'Insert trip name'}}" required>
-                <label for="floatingInput">Insert or update trip name</label>
+                <input type="text" class="form-control" name="name" id="name" value="{{ trip.name or '' }}" placeholder="{{ trip.name or 'Insert trip name'}}" required>
+                <label for="name">Insert or update trip name</label>
             </div>
         </div>
         
         <div class="row mb-3">
             <div class="col">
                 <div class="form-floating">
-                    <input type="text" class="form-control" name="country" value="{{ trip.country }}" required>
-                    <label for="floatingInput">Edit or update Country</label>
+                    <input type="text" class="form-control" name="country" id="country" value="{{ trip.country }}" required>
+                    <label for="country">Edit or update Country</label>
                 </div>
             </div>
             
             <div class="col">
                 <div class="form-floating">
-                    <input type="text" class="form-control" name="city" value="{{ trip.city }}" required>
-                    <label for="floatingInput">Edit or update City</label>
+                    <input type="text" class="form-control" name="city" id="city" value="{{ trip.city }}" required>
+                    <label for="city">Edit or update City</label>
                 </div>
             </div>
 
@@ -66,12 +66,35 @@
         </div>
         
         <div class="form-floating mb-3">
-            <textarea class="form-control" name="notes" placeholder="Notes" rows="3">{{ trip.notes }}</textarea>
-            <label for="floatingTextarea">Notes</label>
+            <textarea class="form-control" name="notes" id="notes" placeholder="Notes" rows="3">{{ trip.notes }}</textarea>
+            <label for="notes">Notes</label>
         </div>
 
         <button class="btn btn-outline-secondary" type="submit">Update Trip</button>
 
     </form>
+
+    <h4 class="mt-5">Add a Buddy</h4>
+    <form method="post" class="container">
+        <input type="hidden" name="add_buddy" value="1">
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">Name</span>
+            <input type="text" class="form-control" name="buddy_name" placeholder="Buddy's name">
+        </div>
+
+        <div class="input-group mb-3">
+            <label class="input-group-text">Relationship</label>
+            <select class="form-select" name="relationship">
+                <option disabled selected value="">Select...</option>
+                {% for r in relationship %}
+                <option value="{{ r }}">{{ r }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-outline-secondary">Add Buddy</button>
+    </form>
+
 
 {% endblock %}

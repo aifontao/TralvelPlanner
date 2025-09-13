@@ -19,7 +19,7 @@ Session(app)
 
 STATUS = ["Visited", "Ongoing", "Scheduled", "Planning", "Wishlist"]
 TYPES = ["Holiday", "Adventure", "Romantic", "Solo", "Work"]
-RELANTIONSHIP = ["Family", "Partner", "Friend", "Coworker"]
+RELATIONSHIP = ["Family", "Partner", "Friend", "Coworker"]
 EXPERIENCES = ["Activity", "Place", "Food"]
 
 # Configure CS50 library to use SQLite database
@@ -38,7 +38,7 @@ def inject_trips():
     # Define status, types, relationship and experiences options (for dropdown)
     status = STATUS
     types = TYPES
-    relationship = RELANTIONSHIP
+    relationship = RELATIONSHIP
     experiences = EXPERIENCES
 
     # Return the data to be available globally in templates
@@ -82,9 +82,9 @@ def add():
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
-        name = None
-        country = request.form.get("country").strip()
-        city = request.form.get("city").strip()
+        name = (request.form.get("name") or "").strip() or None
+        country = (request.form.get("country") or "").strip()
+        city = (request.form.get("city") or "").strip()
         status = request.form.get("status") or None
         trip_type = request.form.get("type") or None
             
@@ -102,6 +102,7 @@ def add():
             print("Database insert error:", e)
             return apology("Failed to add trip")
 
+        flash("Trip added successfully! ☺️")
         return redirect("/")
 
     return render_template("add.html")
@@ -109,11 +110,11 @@ def add():
 
 @app.route("/buddies/<int:trip_id>", methods=["GET", "POST"])
 @login_required
-def add_buddies(trip_id):
+def add_buddie(trip_id):
     
     if request.method == "POST":
         name = request.form.get("name") 
-        relationship = request.form.get("")
+        relationship = request.form.get("relationship")
             
         if not name or not relationship:
                 return apology("Missing Buddie name or relationship", 400)
@@ -127,6 +128,7 @@ def add_buddies(trip_id):
             print("Database insert error:", e)
             return apology("Failed to add buddie")
         
+        flash("Buddie added successfully! ☺️")
         return redirect(f"/trip/{trip_id}")
 
     trip_data = db.execute(
@@ -150,6 +152,7 @@ def delete(trip_id):
             return apology("Trip not found or unauthorized")
 
         db.execute("DELETE FROM trips WHERE id = ? AND user_id = ?", trip_id, session["user_id"])            
+        
         flash("Trip deleted successfully!")
         return redirect("/")
         

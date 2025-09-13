@@ -6,23 +6,23 @@ Add trip
 
 {% block main %}
 
-<form action="/add" method="post" class="container">
+<form action="/trip/{{ trip.id }}/add_buddy" method="post" class="container">
 
     <div class="d-flex align-items-start mb-4">
         <h2>📍 {{ trip.country }} - {{ trip.city }}</h2>
     </div>
 
     <div class="input-group mb-3">
-        <span class="input-group-text">Buddie</span>
-        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="name" placeholder="Insert buddie name"
-            type="text">
+        <span class="input-group-text">Buddy</span>
+        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="buddy_name" placeholder="Insert buddy name"
+            type="text" required>
     </div>
 
     <div class="row mb-3">
         <div class="col">
             <div class="input-group">
                 <label class="input-group-text">Relationship type</label>
-                <select class="form-select" name="relationship" id="relationship">
+                <select class="form-select" name="relationship" id="relationship" required>
                     <option disabled selected value="">Select...</option>
                     {% for relationship_type in relationship %}
                         <option value="{{ relationship_type }}">{{ relationship_type }}</option>
@@ -32,7 +32,7 @@ Add trip
         </div>
     </div>
 
-    <button class="btn btn-outline-secondary mt-4 text-align-start" type="submit">Add buddie</button>
+    <button class="btn btn-outline-secondary mt-4 text-align-start" type="submit">Add buddy</button>
 
 </form>
 

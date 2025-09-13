@@ -71,30 +71,6 @@
         </div>
 
         <button class="btn btn-outline-secondary" type="submit">Update Trip</button>
-
     </form>
-
-    <h4 class="mt-5">Add a Buddy</h4>
-    <form method="post" class="container">
-        <input type="hidden" name="add_buddy" value="1">
-
-        <div class="input-group mb-3">
-            <span class="input-group-text">Name</span>
-            <input type="text" class="form-control" name="buddy_name" placeholder="Buddy's name">
-        </div>
-
-        <div class="input-group mb-3">
-            <label class="input-group-text">Relationship</label>
-            <select class="form-select" name="relationship">
-                <option disabled selected value="">Select...</option>
-                {% for r in relationship %}
-                <option value="{{ r }}">{{ r }}</option>
-                {% endfor %}
-            </select>
-        </div>
-
-        <button type="submit" class="btn btn-outline-secondary">Add Buddy</button>
-    </form>
-
 
 {% endblock %}

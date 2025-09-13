@@ -7,7 +7,13 @@
 {% block main %}
 
     <form action="/add" method="post" class="container">
-
+        
+        <div class="input-group mb-3">
+            <span class="input-group-text">Name</span>
+            <input autocomplete="off" class="form-control mx-auto w-auto" name="name" placeholder="Trip name"
+                type="text">
+        </div>
+        
         <div class="input-group mb-3">
             <span class="input-group-text">Country</span>
             <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="country" placeholder="Country"
@@ -22,7 +28,7 @@
         <div class="row mb-3">
             <div class="col">
                 <div class="input-group">
-                    <label class="input-group-text">Status</label>
+                    <label class="input-group-text" for="status">Status</label>
                     <select class="form-select" name="status" id="status">
                         <option disabled selected value="">Select...</option>
                         {% for status_option in status %}
@@ -36,7 +42,7 @@
             
             <div class="col">
                 <div class="input-group">
-                    <label class="input-group-text">Trip type</label>
+                    <label class="input-group-text" for="type">Trip type</label>
                     <select class="form-select" name="type" id="type">
                         <option disabled selected value="">Select...</option>
                         {% for type in types %}

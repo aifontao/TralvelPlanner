@@ -20,12 +20,24 @@
         <div class="d-flex align-items-start">
             <p>TODO: Other</p>
         </div>
+
+        {% if buddies %}
         <div class="d-flex align-items-start">
             <a href="/edit/{{ trip.id }}" class="btn btn-primary">Edit Trip</a>
         </div>
+        <h5 class="mt-4">Current Buddies:</h5>
+        <ul class="list-group mb-5">
+            {% for buddy in buddies %}
+            <li class="list-group-item">{{ buddy.name }} ({{ buddy.relationship_type }})</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        
         <div class="d-flex align-items-start">
-            <a href="/buddies/{{ trip.id }}" class="btn btn-primary">Add Buddie</a>
+            <a href="/trip/{{ trip.id }}/add_buddy" class="btn btn-primary mt-3">Add buddy</a>
         </div>
+       
     </div>
     
     <!-- Prompt user if they are sure that they want to delete trip -->

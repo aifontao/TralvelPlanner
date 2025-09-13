@@ -325,7 +325,9 @@ def view_trip(trip_id):
     if not trip:
         return apology("Trip not found", 404)
     
-    return render_template("trip.html", trip=trip[0])
+    buddies = db.execute("SELECT * FROM buddies WHERE trip_id = ?", trip_id)
+
+    return render_template("trip.html", trip=trip[0], buddies=buddies)
 
 if __name__ == "__main__":
     app.run(debug=True)

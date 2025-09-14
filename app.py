@@ -16,7 +16,7 @@ def get_city_image(city):
     try:
         headers = {"Authorization": PEXELS_API_KEY}
         params = {"query": city, "per_page":1}
-        response = request.get("https://api.pexels.com/v1/search", headers=headers, params=params)
+        response = requests.get("https://api.pexels.com/v1/search", headers=headers, params=params)
         data = response.json()
         if data["photos"]:
             return data["photos"][0]["src"]["large"]
@@ -342,8 +342,9 @@ def view_trip(trip_id):
         return apology("Trip not found", 404)
     
     buddies = db.execute("SELECT * FROM buddies WHERE trip_id = ?", trip_id)
+    image_url = get_city_image(trip[0]["city"])
 
-    return render_template("trip.html", trip=trip[0], buddies=buddies)
+    return render_template("trip.html", trip=trip[0], buddies=buddies, image_url=image_url)
 
 if __name__ == "__main__":
     app.run(debug=True)

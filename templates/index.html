@@ -9,15 +9,16 @@
 
     <div class="card-group mb-5">
         {% for trip in trips %}
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
+        <div class="card mb-4 shadow-sm">
+            {% if trip.image_url %}
+            <img src="{{ trip.image_url }}" class="card-img-top" alt="Image of {{ trip.city }}">
+            {% endif %}
             <div class="card-body">
-                {% if trip.name%}
+                {% if trip.name %}
                     <h5 class="card-title">{{ trip.name }}</h5>
                 {% endif %}
-                <h3 class="m-3">{{ trip.country }}</h3>
-                <h6 class="m-3">{{ trip.city }}</h6>
-                <a href="/trip/{{ trip.id }}" class="btn btn-primary mt-3">View Trip</a>
+                <p class="card-text">{{ trip.city }}, {{ trip.country }}</p>
+                <a href="/trip/{{ trip.id }}" class="btn btn-outline-primary btn-sm">View Trip</a>
             </div>
         </div>
         {% endfor %}

@@ -8,6 +8,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import apology, login_required
 
 # Import image API to display photos of the cities - Learned on Shecodes Workshop
+
 import requests
 
 PEXELS_API_KEY = "d7bDbjgQNBsos5CD1RYTFipJzV9I0Kst00wjilfajFe0I6JEhBznKJbu"
@@ -21,7 +22,7 @@ def get_city_image(city):
         if data["photos"]:
             return data["photos"][0]["src"]["large"]
     except Exception as e:
-        print("Error searching fot photo:", e)
+        print("Error searching for photo:", e)
     return None
 
 # Configure application
@@ -77,8 +78,16 @@ def index():
     """Show user dashboard"""
 
     trips = db.execute("SELECT id, name, country, city FROM trips WHERE user_id = ?", session["user_id"])
-
-    return render_template("index.html", trips=trips)
+    print(trips[0])
+    # Show image of each trip - Used ChatGPT to add this feature
+    enriched_trips = []
+    for trip in trips:
+        trip_copy = trip.copy()
+        image_url = get_city_image(trip["city"])
+        trip_copy["image_url"] = image_url
+        enriched_trips.append(trip_copy)
+    print(enriched_trips[0])
+    return render_template("index.html", trips=enriched_trips)
 
 
 @app.route("/account", methods=["GET", "POST"])

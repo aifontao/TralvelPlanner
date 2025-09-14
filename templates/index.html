@@ -7,23 +7,25 @@
 {% block main %}
     <h1 class="m-5">My trips</h1>
 
-    <div class="card-group mb-5">
+    <div class="row row-cols-1 row-cols-md-4 g-4 mb-5">
         {% for trip in trips %}
-        <div class="card mb-4 shadow-sm">
-            {% if trip.image_url %}
-            <img src="{{ trip.image_url }}" class="card-img-top" alt="Image of {{ trip.city }}">
-            {% endif %}
-            <div class="card-body">
-                {% if trip.name %}
-                    <h5 class="card-title">{{ trip.name }}</h5>
+        <div class="col">
+            <div class="card mb-3">
+                {% if trip.image_url %}
+                <img src="{{ trip.image_url }}" class="card-img-top" alt="Image of {{ trip.city }}">
                 {% endif %}
-                <p class="card-text">{{ trip.city }}, {{ trip.country }}</p>
-                <a href="/trip/{{ trip.id }}" class="btn btn-outline-primary btn-sm">View Trip</a>
+                <div class="card-body">
+                    {% if trip.name %}
+                    <h5 class="card-title">{{ trip.name }}</h5>
+                    {% endif %}
+                    <h6 class="card-text">{{ trip.city }} - {{ trip.country }}</h6>
+                    <a href="/trip/{{ trip.id }}" class="btn btn-outline-primary btn-sm m-2">View Trip</a>
+                </div>
             </div>
         </div>
         {% endfor %}
     </div>
 
-    <a class="btn btn-primary" href="/add">⊕ Add Trip</a>
+    <a class="btn btn-primary mb-5" href="/add">⊕ Add Trip</a>
 
 {% endblock %}

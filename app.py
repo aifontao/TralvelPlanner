@@ -7,7 +7,24 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from helpers import apology, login_required
 
-#Configure application
+# Import image API to display photos of the cities - Learned on Shecodes Workshop
+import requests
+
+PEXELS_API_KEY = "d7bDbjgQNBsos5CD1RYTFipJzV9I0Kst00wjilfajFe0I6JEhBznKJbu"
+
+def get_city_image(city):
+    try:
+        headers = {"Authorization": PEXELS_API_KEY}
+        params = {"query": city, "per_page":1}
+        response = request.get("https://api.pexels.com/v1/search", headers=headers, params=params)
+        data = response.json()
+        if data["photos"]:
+            return data["photos"][0]["src"]["large"]
+    except Exception as e:
+        print("Error searching fot photo:", e)
+    return None
+
+# Configure application
 app = Flask(__name__)
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -137,7 +154,6 @@ def add_buddy(trip_id):
         return apology("Trip not found", 404)
         
     return render_template("add_buddy.html", trip=trip_data[0])
-
 
 @app.route("/delete/<int:trip_id>", methods=["POST"])
 @login_required

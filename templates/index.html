@@ -15,17 +15,14 @@
                 <img src="{{ trip.image_url }}" class="card-img-top" alt="Image of {{ trip.city }}">
                 {% endif %}
                 <div class="card-body">
-                    {% if trip.name %}
-                    <h5 class="card-title">{{ trip.name }}</h5>
-                    {% endif %}
-                    <h6 class="card-text">{{ trip.city }} - {{ trip.country }}</h6>
-                    <a href="/trip/{{ trip.id }}" class="btn btn-outline-primary btn-sm m-2">View Trip</a>
+                    <h5 class="card-text">{{ trip.city }} - {{ trip.country }}</h5>
+                    <a href="/trip/{{ trip.id }}" class="btn btn-secondary btn-sm m-2">View Trip</a>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
 
-    <a class="btn btn-primary mb-5" href="/add">⊕ Add Trip</a>
+    <a class="btn btn-dark mb-5" href="/add">⊕ Add Trip</a>
 
 {% endblock %}

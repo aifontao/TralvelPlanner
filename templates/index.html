@@ -9,17 +9,17 @@
 
     <div class="row row-cols-1 row-cols-md-4 g-4 mb-5">
         {% for trip in trips %}
-        <div class="col">
-            <div class="card mb-3">
-                {% if trip.image_url %}
-                <img src="{{ trip.image_url }}" class="card-img-top" alt="Image of {{ trip.city }}">
-                {% endif %}
-                <div class="card-body">
-                    <h5 class="card-text">{{ trip.city }} - {{ trip.country }}</h5>
-                    <a href="/trip/{{ trip.id }}" class="btn btn-secondary btn-sm m-2">View Trip</a>
+            <div class="col">
+                <div class="card mb-3">
+                    {% if trip.image_url %}
+                        <img src="{{ trip.image_url }}" class="card-img-top" alt="Image of {{ trip.city }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-text">{{ trip.city }} - {{ trip.country }}</h5>
+                        <a href="/trip/{{ trip.id }}" class="btn btn-secondary btn-sm m-2">View Trip</a>
+                    </div>
                 </div>
             </div>
-        </div>
         {% endfor %}
     </div>
 

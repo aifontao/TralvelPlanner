@@ -35,8 +35,8 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-STATUS = ["Visited", "Ongoing", "Scheduled", "Planning", "Wishlist"]
-TYPES = ["Holiday", "Adventure", "Romantic", "Solo", "Work"]
+STATUS = ["✅ Visited", "⏱️ Ongoing", "📅 Scheduled", "📝 Planning", "🌟 Wishlist"]
+TYPES = ["🏝️ Holiday", "🌄 Adventure", "😻 Romantic", "🧘‍♀️ Solo", "💼 Work"]
 RELATIONSHIP = ["Family", "Partner", "Friend", "Coworker"]
 EXPERIENCES = ["Activity", "Place", "Food"]
 

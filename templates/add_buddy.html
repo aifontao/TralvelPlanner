@@ -6,23 +6,25 @@ Add trip
 
 {% block main %}
 
-<form action="/trip/{{ trip.id }}/add_buddy" method="post" class="container">
+<form action="/trip/{{ trip.id }}/add_buddy" method="post" class="container text-center" style="max-width: 400px;">
 
-    <div class="d-flex align-items-start mb-4">
+    <div class="d-flex justify-content-center mt-5">
         <h2>📍 {{ trip.country }} - {{ trip.city }}</h2>
     </div>
 
+    <p class="my-4">Add a Buddy to your trip! 😁</p>
+
     <div class="input-group mb-3">
         <span class="input-group-text">Buddy</span>
-        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="buddy_name" placeholder="Insert buddy name"
+        <input autocomplete="off" autofocus class="form-control" name="buddy_name" placeholder="Insert buddy name"
             type="text" required>
     </div>
 
     <div class="row mb-3">
         <div class="col">
             <div class="input-group">
-                <label class="input-group-text">Relationship type</label>
-                <select class="form-select" name="relationship" id="relationship" required>
+                <label class="input-group-text" for="relationship">Relationship type</label>
+                <select class="form-select" name="relationship" id="relationship" required aria-label="Select relationship type">
                     <option disabled selected value="">Select...</option>
                     {% for relationship_type in relationship %}
                         <option value="{{ relationship_type }}">{{ relationship_type }}</option>
@@ -32,7 +34,9 @@ Add trip
         </div>
     </div>
 
-    <button class="btn btn-outline-secondary mt-4 text-align-start" type="submit">Add buddy</button>
+    <div class="my-5">
+        <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-user-plus"></i> Add buddy</button>
+    </div>
 
 </form>
 

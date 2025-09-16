@@ -14,31 +14,29 @@
 
         <div class="input-group mb-3">
             <span class="input-group-text">Name</span>
-            <input autocomplete="off" class="form-control mx-auto w-auto" name="name" placeholder="Trip name"
+            <input autocomplete="off" class="form-control" name="name" placeholder="Trip name"
                 type="text">
         </div>
         
         <div class="input-group mb-3">
             <span class="input-group-text">Country</span>
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="country" placeholder="Country"
+            <input autocomplete="off" autofocus class="form-control" name="country" placeholder="Country"
                 type="text">
         </div>
 
         <div class="input-group mb-3">
             <span class="input-group-text">City</span>
-            <input class="form-control mx-auto w-auto" name="city" placeholder="City" type="text">
+            <input class="form-control" name="city" placeholder="City" type="text">
         </div>
 
         <div class="row mb-3">
             <div class="col">
                 <div class="input-group">
                     <label class="input-group-text" for="status">Status</label>
-                    <select class="form-select" name="status" id="status">
+                    <select class="form-select" name="status" id="status" required aria-label="Select trip status">
                         <option disabled selected value="">Select...</option>
                         {% for status_option in status %}
-                        {% if status_option != 'Visited' %}
-                        <option value="{{ status_option }}">{{ status_option }}</option>
-                        {% endif %}
+                            <option value="{{ status_option }}">{{ status_option }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -47,7 +45,7 @@
             <div class="col">
                 <div class="input-group">
                     <label class="input-group-text" for="type">Trip type</label>
-                    <select class="form-select" name="type" id="type">
+                    <select class="form-select" name="type" id="type"  required aria-label="Select trip type">
                         <option disabled selected value="">Select...</option>
                         {% for type in types %}
                             <option value="{{ type }}">{{ type }}</option>
@@ -58,7 +56,7 @@
         </div>
         
         <div class="my-5">
-            <button class="btn btn-warning mt-4 text-align-start" type="submit"><i class="fa-solid fa-plus"></i> Add trip</button>
+            <button class="btn btn-warning mt-4" type="submit"><i class="fa-solid fa-plus"></i> Add trip</button>
         </div>
 
     </form>

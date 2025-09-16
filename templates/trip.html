@@ -5,127 +5,127 @@ Trip detail
 {% endblock %}
 
 {% block main %}
-<div class="card mx-auto">
-    <div class="row g-0">
+    <div class="card mx-auto">
+        <div class="row g-0">
 
-        <!-- Trip image (only shown if image_url is available) -->
-        {% if image_url %}
-        <div class="col-md-4">
-            <img src="{{ image_url }}" alt="Image of {{ trip.city }}" class="img-fluid h-100 w-100 object-fit-cover">
+            <!-- Trip image (only shown if image_url is available) -->
+            {% if image_url %}
+                <div class="col-md-4">
+                    <img src="{{ image_url }}" alt="Image of {{ trip.city }}" class="img-fluid h-100 w-100 object-fit-cover">
+                </div>
+            {% endif %}
+
+            <!-- Main content (trip name, location, details) -->
+            <div class="{% if image_url %}col-md-6{% else %}col-md-8{% endif %}">
+                <div class="card-body">
+
+                    {% if trip.name %}
+                        <h1 class="card-title text-start mb-3">🗺️ {{ trip.name | title }}</h1>
+                    {% endif %}
+
+                    <h2 class="text-start mb-4">📍 {{ trip.country }} - {{ trip.city }}</h2>
+
+                    <!-- Table with trip details -->
+                    <table class="table table-borderless table-sm table-responsive-md table-narrow-th text-start">
+                        <tbody>
+                            {% if trip.status %}
+                                <tr>
+                                    <th scope="row">Status</th>
+                                    <td>{{ trip.status }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if trip.trip_type %}
+                                <tr>
+                                    <th scope="row">Trip type</th>
+                                    <td>{{ trip.trip_type }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if trip.rating %}
+                                <tr>
+                                    <th scope="row">Rating</th>
+                                    <td>{{ trip.rating }}</td>
+                                </tr>
+                            {% endif %}
+                            {% if trip.notes %}
+                                <tr>
+                                    <th scope="row">Notes</th>
+                                    <td>{{ trip.notes }}</td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+
+                    <!-- Table of trip buddies (if any) -->
+                    {% if buddies %}
+                        <table class="table table-sm caption-top table-narrow-th text-start w-auto">
+                            <caption>List of trip buddies 😊</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Relationship</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for buddy in buddies %}
+                                    <tr>
+                                        <td>{{ buddy.name }}</td>
+                                        <td>{{ buddy.relationship_type }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
+
+                    <!-- Button to add a new trip buddy -->
+                    <div class="d-flex justify-content-start mt-3">
+                        <a href="/trip/{{ trip.id }}/add_buddy" class="btn btn-success btn-sm">
+                            <i class="fa-solid fa-user-plus"></i> Add buddy
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Edit and Delete buttons section -->
+            <div class="col-md-2 d-flex align-items-start justify-content-end gap-2 p-3">
+                <a href="/edit/{{ trip.id }}" class="btn btn-secondary btn-sm" data-bs-toggle="tooltip" title="Edit trip">
+                    <i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>
+                </a>
+                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#deleteModal{{ trip.id }}" data-bs-toggle="tooltip" title="Delete trip">
+                    <i class="fa-solid fa-trash-can" style="color: #ffffff;"></i>
+                </button>
+            </div>
+
         </div>
-        {% endif %}
+    </div>
 
-        <!-- Main content (trip name, location, details) -->
-        <div class="{% if image_url %}col-md-6{% else %}col-md-8{% endif %}">
-            <div class="card-body">
+    <!-- Modal to confirm trip deletion -->
+    <div class="modal fade" id="deleteModal{{ trip.id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ trip.id }}"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-                {% if trip.name %}
-                <h1 class="card-title text-start mb-3">🗺️ {{ trip.name | title }}</h1>
-                {% endif %}
+                <!-- Modal header -->
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteModalLabel{{ trip.id }}">Delete trip</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
 
-                <h2 class="text-start mb-4">📍 {{ trip.country }} - {{ trip.city }}</h2>
+                <!-- Modal body with confirmation question -->
+                <div class="modal-body">
+                    Are you sure you want to delete the trip to <strong>{{ trip.city }}</strong>?
+                </div>
 
-                <!-- Table with trip details -->
-                <table class="table table-borderless table-sm table-responsive-md table-narrow-th text-start">
-                    <tbody>
-                        {% if trip.status %}
-                        <tr>
-                            <th scope="row">Status</th>
-                            <td>{{ trip.status }}</td>
-                        </tr>
-                        {% endif %}
-                        {% if trip.trip_type %}
-                        <tr>
-                            <th scope="row">Trip type</th>
-                            <td>{{ trip.trip_type }}</td>
-                        </tr>
-                        {% endif %}
-                        {% if trip.rating %}
-                        <tr>
-                            <th scope="row">Rating</th>
-                            <td>{{ trip.rating }}</td>
-                        </tr>
-                        {% endif %}
-                        {% if trip.notes %}
-                        <tr>
-                            <th scope="row">Notes</th>
-                            <td>{{ trip.notes }}</td>
-                        </tr>
-                        {% endif %}
-                    </tbody>
-                </table>
-
-                <!-- Table of trip buddies (if any) -->
-                {% if buddies %}
-                <table class="table table-sm caption-top table-narrow-th text-start w-auto">
-                    <caption>List of trip buddies 😊</caption>
-                    <thead>
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Relationship</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for buddy in buddies %}
-                        <tr>
-                            <td>{{ buddy.name }}</td>
-                            <td>{{ buddy.relationship_type }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                {% endif %}
-
-                <!-- Button to add a new trip buddy -->
-                <div class="d-flex justify-content-start mt-3">
-                    <a href="/trip/{{ trip.id }}/add_buddy" class="btn btn-success btn-sm">
-                        <i class="fa-solid fa-user-plus"></i> Add buddy
-                    </a>
+                <!-- Modal footer with action buttons -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form method="POST" action="/delete/{{ trip.id }}">
+                        <button type="submit" class="btn btn-danger">Confirm Delete</button>
+                    </form>
                 </div>
 
             </div>
         </div>
-
-        <!-- Edit and Delete buttons section -->
-        <div class="col-md-2 d-flex align-items-start justify-content-end gap-2 p-3">
-            <a href="/edit/{{ trip.id }}" class="btn btn-secondary btn-sm" data-bs-toggle="tooltip" title="Edit trip">
-                <i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>
-            </a>
-            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                data-bs-target="#deleteModal{{ trip.id }}" data-bs-toggle="tooltip" title="Delete trip">
-                <i class="fa-solid fa-trash-can" style="color: #ffffff;"></i>
-            </button>
-        </div>
-
     </div>
-</div>
-
-<!-- Modal to confirm trip deletion -->
-<div class="modal fade" id="deleteModal{{ trip.id }}" tabindex="-1" aria-labelledby="deleteModalLabel{{ trip.id }}"
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-
-            <!-- Modal header -->
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="deleteModalLabel{{ trip.id }}">Delete trip</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <!-- Modal body with confirmation question -->
-            <div class="modal-body">
-                Are you sure you want to delete the trip to <strong>{{ trip.city }}</strong>?
-            </div>
-
-            <!-- Modal footer with action buttons -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <form method="POST" action="/delete/{{ trip.id }}">
-                    <button type="submit" class="btn btn-danger">Confirm Delete</button>
-                </form>
-            </div>
-
-        </div>
-    </div>
-</div>
 {% endblock %}

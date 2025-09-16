@@ -6,8 +6,12 @@
 
 {% block main %}
 
-    <form action="/add" method="post" class="container">
+    <form action="/add" method="post" class="container" style="max-width: 500px;">
         
+        <h2 class="my-5">⊕ Add a new trip!</h2>
+
+        <p class="my-4">Add a new trip to your dashboard! 📋</p>
+
         <div class="input-group mb-3">
             <span class="input-group-text">Name</span>
             <input autocomplete="off" class="form-control mx-auto w-auto" name="name" placeholder="Trip name"
@@ -53,8 +57,9 @@
             </div>
         </div>
         
-        
-        <button class="btn btn-outline-secondary mt-4 text-align-start" type="submit">Add trip</button>
+        <div class="my-5">
+            <button class="btn btn-warning mt-4 text-align-start" type="submit"><i class="fa-solid fa-plus"></i> Add trip</button>
+        </div>
 
     </form>
 

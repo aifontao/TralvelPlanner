@@ -39,7 +39,7 @@
                     <select class="form-select" name="status" required>
                         <option disabled selected value="{{ trip.status }}">Change Status</option>
                         {% for status_option in status %}
-                        <option value="{{ status_option }}" {% if trip.status==status_option %}selected{% endif %}>{{ status_option }}</option>
+                            <option value="{{ status_option }}" {% if trip.status==status_option %}selected{% endif %}>{{ status_option }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -51,7 +51,7 @@
                     <select class="form-select" name="type" required>
                         <option disabled selected value="{{ trip.trip_type }}">Trip Type</option>
                             {% for type_option in types %}
-                            <option value="{{ type_option }}" {% if trip.trip_type==type_option %}selected{% endif %}>{{ type_option }}</option>
+                                <option value="{{ type_option }}" {% if trip.trip_type==type_option %}selected{% endif %}>{{ type_option }}</option>
                             {% endfor %}
                     </select>
                 </div>

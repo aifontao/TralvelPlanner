@@ -5,19 +5,14 @@
 {% endblock %}
 
 {% block main %}
-<h3 class="mt-4">Account</h3>
+    <h3 class="m-5"><i class="fa-solid fa-gear"></i> Account settings</h3>
 
-<table class="table mx-auto mt-5 table-borderless" style="width: 300px">
+    <h5 class="mb-3">Username</h5>
     {% for account in account%}
-    <tr>
-        <th scope="row">Name</th>
-        <td>{{ account.username }}</td>
-    </tr>
+    <h6><i class="fa-solid fa-user"></i> {{ account.username }}</h6>
     {% endfor %}
-</table>
 
-<div>
-    <a class="btn btn-light" href="/password">Change Password</a>
-</div>
-
+    <div class="m-5">
+        <a class="btn btn-secondary" href="/password"><i class="fa-solid fa-key"></i> Change Password</a>
+    </div>
 {% endblock %}

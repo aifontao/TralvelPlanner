@@ -186,34 +186,48 @@ def delete(trip_id):
 @login_required
 def edit_trip(trip_id):
 
-    # Handle form submission for editing
-    if request.method == "POST":
-        name = request.form.get("name")
-        country = request.form.get("country")
-        city = request.form.get("city")
-        status = request.form.get("status")
-        trip_type = request.form.get("type")
-        rating = request.form.get("rating") or None
-        notes = request.form.get("notes") or None
-
-        if not name or not country or not city:
-            return apology("Missing required fields", 400)
-            
-        if not status or not trip_type:
-            return apology("Missing status or trip types", 400)
-
-        # Add details to trips
-        db.execute("UPDATE trips SET name = ?, country = ?, city = ?, notes = ?, trip_type = ?, status = ?, rating = ? WHERE id = ? AND user_id = ?", name, country, city, notes, trip_type, status, rating, trip_id, session["user_id"])
-
-        flash("Trip updated successfully! ☺️")
-        return redirect(f"/trip/{trip_id}")
-
     # On GET - show trip details
     trip_data = db.execute("SELECT * FROM trips WHERE id = ? AND user_id = ?", trip_id, session["user_id"])
     if not trip_data:
         return apology("Trip not found", 404)
     
-    return render_template("edit_trip.html", trip=trip_data[0])
+    trip = trip_data[0]
+
+    # Handle form submission for editing
+    if request.method == "POST":
+        # Use submitted value or keep current one
+        trip_name = request.form.get("trip_name_new") or trip["name"]
+        country = request.form.get("country_new") or trip["country"]
+        city = request.form.get("city_new") or trip["city"]
+        status = request.form.get("status_new") or trip["status"]
+        trip_type = request.form.get("trip_type_new") or trip["trip_type"]
+        notes = request.form.get("notes_new") or trip["notes"]
+
+        # Only handle rating if status is "Visited"
+        if status == "✅ Visited":
+            rating = request.form.get("rating_new")
+            try:
+                # Convert rating to int if provided
+                rating = int(rating) if rating else trip["rating"]
+                # Validate rating range
+                if rating < 1 or rating > 5:
+                    flash("Rating must be between 1 and 5")
+                    return redirect(f"/edit_trip/{trip_id}")
+            except ValueError:
+                flash("Rating must be a number")
+                return redirect(f"/edit_trip/{trip_id}")
+        else:
+            rating = None
+
+        db.execute(
+                "UPDATE trips SET name = ?, country = ?, city = ?, notes = ?, trip_type = ?, status = ?, rating = ? WHERE id = ? AND user_id = ?",
+                trip_name, country, city, notes, trip_type, status, rating, trip_id, session["user_id"]
+                )
+
+        flash("Trip updated successfully! ☺️")
+        return redirect(f"/trip/{trip_id}")
+    
+    return render_template("edit_trip.html", trip=trip)
 
 
 @app.route("/login", methods=["GET", "POST"])

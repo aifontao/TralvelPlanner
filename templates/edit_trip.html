@@ -11,7 +11,7 @@
 
         <div class="input-group mb-3">
             <div class="form-floating">
-                <input type="text" class="form-control" name="name" id="name" value="{{ trip.name or '' }}" placeholder="{{ trip.name or 'Insert trip name'}}">
+                <input type="text" class="form-control" name="trip_name_new" id="name" value="{{ trip.name or '' }}" placeholder="{{ trip.name or 'Insert trip name'}}">
                 <label for="name">Insert or update trip name</label>
             </div>
         </div>
@@ -19,14 +19,14 @@
         <div class="row mb-3">
             <div class="col">
                 <div class="form-floating">
-                    <input type="text" class="form-control" name="country" id="country" value="{{ trip.country }}" required>
+                    <input type="text" class="form-control" name="country_new" id="country" value="{{ trip.country }}">
                     <label for="country">Edit or update Country</label>
                 </div>
             </div>
             
             <div class="col">
                 <div class="form-floating">
-                    <input type="text" class="form-control" name="city" id="city" value="{{ trip.city }}" required>
+                    <input type="text" class="form-control" name="city_new" id="city" value="{{ trip.city }}">
                     <label for="city">Edit or update City</label>
                 </div>
             </div>
@@ -37,7 +37,7 @@
             <div class="col">
                 <div class="input-group">
                     <div class="input-group-text">Status</div>
-                    <select class="form-select" name="status" required>
+                    <select class="form-select" name="status_new">
                         <option disabled selected value="{{ trip.status }}">Change Status</option>
                         {% for status_option in status %}
                         <option value="{{ status_option }}" {% if trip.status==status_option %}selected{% endif %}>{{ status_option }}</option>
@@ -49,7 +49,7 @@
             <div class="col">
                 <div class="input-group">
                     <div class="input-group-text">Trip type</div>
-                    <select class="form-select" name="type" required>
+                    <select class="form-select" name="trip_type_new">
                         <option disabled selected value="{{ trip.trip_type }}">Trip Type</option>
                             {% for type_option in types %}
                             <option value="{{ type_option }}" {% if trip.trip_type==type_option %}selected{% endif %}>{{ type_option }}</option>
@@ -61,13 +61,13 @@
             <div class="col">
                 <div class="input-group">
                     <div class="input-group-text">Rating</div>
-                    <input type="number" class="form-control" name="rating" min="1" max="5" value="{{ trip.rating or '' }}">
+                    <input type="number" class="form-control" name="rating_new" min="1" max="5" {% if trip.status != "✅ Visited" %} disabled {% endif %} value="{{ trip.rating or '' }}">
                 </div>
             </div>
         </div>
         
         <div class="form-floating mb-3">
-            <textarea class="form-control" name="notes" id="notes" placeholder="Notes" rows="3">{{ trip.notes }}</textarea>
+            <textarea class="form-control" name="notes_new" id="notes" placeholder="Notes" rows="3">{{ trip.notes }}</textarea>
             <label for="notes">Notes</label>
         </div>
 

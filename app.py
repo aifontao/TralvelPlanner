@@ -182,9 +182,9 @@ def delete(trip_id):
         
 
 # Searched chatGPT to understand how to change the route parameter to a given trip_id
-@app.route("/edit/<int:trip_id>", methods=["GET", "POST"])
+@app.route("/edit_trip/<int:trip_id>", methods=["GET", "POST"])
 @login_required
-def edit(trip_id):
+def edit_trip(trip_id):
 
     # Handle form submission for editing
     if request.method == "POST":
@@ -213,7 +213,7 @@ def edit(trip_id):
     if not trip_data:
         return apology("Trip not found", 404)
     
-    return render_template("edit.html", trip=trip_data[0])
+    return render_template("edit_trip.html", trip=trip_data[0])
 
 
 @app.route("/login", methods=["GET", "POST"])

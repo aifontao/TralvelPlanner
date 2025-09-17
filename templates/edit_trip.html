@@ -6,11 +6,12 @@
 
 {% block main %}
 
-    <form action="/edit/{{ trip.id }}" method="post" class="container">
+    <!-- Trip update form-->
+    <form action="/edit_trip/{{ trip.id }}" method="post" class="container" style="max-width:800px;">
 
         <div class="input-group mb-3">
             <div class="form-floating">
-                <input type="text" class="form-control" name="name" id="name" value="{{ trip.name or '' }}" placeholder="{{ trip.name or 'Insert trip name'}}" required>
+                <input type="text" class="form-control" name="name" id="name" value="{{ trip.name or '' }}" placeholder="{{ trip.name or 'Insert trip name'}}">
                 <label for="name">Insert or update trip name</label>
             </div>
         </div>
@@ -39,7 +40,7 @@
                     <select class="form-select" name="status" required>
                         <option disabled selected value="{{ trip.status }}">Change Status</option>
                         {% for status_option in status %}
-                            <option value="{{ status_option }}" {% if trip.status==status_option %}selected{% endif %}>{{ status_option }}</option>
+                        <option value="{{ status_option }}" {% if trip.status==status_option %}selected{% endif %}>{{ status_option }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -51,7 +52,7 @@
                     <select class="form-select" name="type" required>
                         <option disabled selected value="{{ trip.trip_type }}">Trip Type</option>
                             {% for type_option in types %}
-                                <option value="{{ type_option }}" {% if trip.trip_type==type_option %}selected{% endif %}>{{ type_option }}</option>
+                            <option value="{{ type_option }}" {% if trip.trip_type==type_option %}selected{% endif %}>{{ type_option }}</option>
                             {% endfor %}
                     </select>
                 </div>

@@ -33,7 +33,7 @@
             <div class="col">
                 <div class="input-group">
                     <label class="input-group-text" for="status">Status</label>
-                    <select class="form-select" name="status" id="status" required aria-label="Select trip status">
+                    <select class="form-select" name="status" id="status" aria-label="Select trip status">
                         <option disabled selected value="">Select...</option>
                         {% for status_option in status %}
                             <option value="{{ status_option }}">{{ status_option }}</option>
@@ -45,7 +45,7 @@
             <div class="col">
                 <div class="input-group">
                     <label class="input-group-text" for="type">Trip type</label>
-                    <select class="form-select" name="type" id="type"  required aria-label="Select trip type">
+                    <select class="form-select" name="type" id="type" aria-label="Select trip type">
                         <option disabled selected value="">Select...</option>
                         {% for type in types %}
                             <option value="{{ type }}">{{ type }}</option>

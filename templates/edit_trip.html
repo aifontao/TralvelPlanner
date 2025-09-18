@@ -8,7 +8,7 @@
 
     <!-- Trip update form-->
     <form action="/edit_trip/{{ trip.id }}" method="post" class="container" style="max-width:800px;">
-
+        
         <div class="input-group mb-3">
             <div class="form-floating">
                 <input type="text" class="form-control" name="trip_name_new" id="name" value="{{ trip.name or '' }}" placeholder="{{ trip.name or 'Insert trip name'}}">
@@ -85,7 +85,14 @@
             <label for="notes">Notes</label>
         </div>
 
-        <button class="btn btn-outline-secondary" type="submit">Update Trip</button>
+        <div class="d-flex gap-2 mt-3">
+            <button class="btn btn-outline-dark" type="submit">Update Trip</button>
+            <a href="/trip/{{ trip.id }}" class="btn btn-outline-secondary">
+                <i class="fa-solid fa-xmark"></i> Cancel
+            </a>
+        </div>
+
+
     </form>
 
     <!-- Coded with what I've learnt on SheCodes workshops and verified using chatgpt -->

@@ -75,7 +75,7 @@
             <div class="col">
                 <div class="input-group">
                     <div class="input-group-text">Rating</div>
-                    <input type="number" class="form-control" name="rating_new" min="1" max="5" {% if trip.status != "✅ Visited" %} disabled {% endif %} value="{{ trip.rating or '' }}">
+                    <input type="number" class="form-control" name="rating_new" min="1" max="5" value="{{ trip.rating or '' }}">
                 </div>
             </div>
         </div>
@@ -95,7 +95,7 @@
             const ratingInput = document.querySelector('input[name="rating_new"]');
 
             function toggleRating() {
-                if (statusSelect.value === "✅ Visited") {
+                if (statusSelect.value === "Visited") {
                     ratingInput.disabled = false;
                 } else {
                     ratingInput.disabled = true;

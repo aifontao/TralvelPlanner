@@ -28,16 +28,30 @@ Trip detail
                     <!-- Table with trip details -->
                     <table class="table table-borderless table-sm table-responsive-md table-narrow-th text-start">
                         <tbody>
+                            {% set status_emoji_map = {
+                                "Visited": "✅",
+                                "Ongoing": "⏱️",
+                                "Scheduled": "📅",
+                                "Planning": "📝",
+                                "Wishlist": "🌟"
+                            } %}
                             {% if trip.status %}
                                 <tr>
                                     <th scope="row">Status</th>
-                                    <td>{{ trip.status }}</td>
+                                    <td>{{ status_emoji_map[trip.status] }} {{ trip.status }}</td>
                                 </tr>
                             {% endif %}
+                            {% set trip_emoji_map = {
+                                "Holiday": "🏝️",
+                                "Adventure": "🌄",
+                                "Romantic": "😻",
+                                "Solo": "🙏",
+                                "Work": "💼"
+                            } %}
                             {% if trip.trip_type %}
                                 <tr>
                                     <th scope="row">Trip type</th>
-                                    <td>{{ trip.trip_type }}</td>
+                                    <td>{{ trip_emoji_map[trip.trip_type ]}} {{ trip.trip_type }}</td>
                                 </tr>
                             {% endif %}
                             {% if trip.rating %}

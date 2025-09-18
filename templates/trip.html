@@ -57,7 +57,7 @@ Trip detail
                             {% if trip.rating %}
                                 <tr>
                                     <th scope="row">Rating</th>
-                                    <td>⭐️ {{ trip.rating }}</td>
+                                    <td>{{ "⭐️ " * trip.rating }} ({{trip.rating}} of 5)</td>
                                 </tr>
                             {% endif %}
                             {% if trip.notes %}

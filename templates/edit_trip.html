@@ -40,7 +40,7 @@
                     <select class="form-select" name="status_new">
                         <option disabled selected value="{{ trip.status }}">Change Status</option>
                         {% for status_option in status %}
-                        <option value="{{ status_option }}" {% if trip.status==status_option %}selected{% endif %}>{{ status_option }}</option>
+                        <option value="{{ status_option }}" {% if trip.status == status_option %}selected{% endif %}>{{ status_option }}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -73,5 +73,25 @@
 
         <button class="btn btn-outline-secondary" type="submit">Update Trip</button>
     </form>
+
+    <!-- Coded with what I've learnt on SheCodes workshops and verified using chatgpt -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const statusSelect = document.querySelector('select[name="status_new"]');
+            const ratingInput = document.querySelector('input[name="rating_new"]');
+
+            function toggleRating() {
+                if (statusSelect.value === "✅ Visited") {
+                    ratingInput.disabled = false;
+                } else {
+                    ratingInput.disabled = true;
+                    ratingInput.value = "";
+                }
+            }
+
+            statusSelect.addEventListener('change', toggleRating);
+            toggleRating(); // Run on page load
+        });
+    </script>
 
 {% endblock %}

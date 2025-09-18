@@ -37,22 +37,36 @@
             <div class="col">
                 <div class="input-group">
                     <div class="input-group-text">Status</div>
+                    {% set status_emoji_map = {
+                        "Visited": "✅",
+                        "Ongoing": "⏱️",
+                        "Scheduled": "📅",
+                        "Planning": "📝",
+                        "Wishlist": "🌟"
+                    } %}
                     <select class="form-select" name="status_new">
                         <option disabled selected value="{{ trip.status }}">Change Status</option>
                         {% for status_option in status %}
-                        <option value="{{ status_option }}" {% if trip.status == status_option %}selected{% endif %}>{{ status_option }}</option>
+                            <option value="{{ status_option }}" {% if trip.status == status_option %}selected{% endif %}>{{ status_emoji_map[status_option]}} {{ status_option }}</option>
                         {% endfor %}
                     </select>
                 </div>
             </div>
-            
+
             <div class="col">
                 <div class="input-group">
                     <div class="input-group-text">Trip type</div>
+                    {% set trip_emoji_map = {
+                    "Holiday": "🏝️",
+                    "Adventure": "🌄",
+                    "Romantic": "😻",
+                    "Solo": "🙏",
+                    "Work": "💼"
+                    } %}
                     <select class="form-select" name="trip_type_new">
                         <option disabled selected value="{{ trip.trip_type }}">Trip Type</option>
                             {% for type_option in types %}
-                            <option value="{{ type_option }}" {% if trip.trip_type==type_option %}selected{% endif %}>{{ type_option }}</option>
+                            <option value="{{ type_option }}" {% if trip.trip_type==type_option %}selected{% endif %}>{{ trip_emoji_map[type_option] }} {{ type_option }}</option>
                             {% endfor %}
                     </select>
                 </div>

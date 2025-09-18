@@ -35,8 +35,8 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-STATUS = ["✅ Visited", "⏱️ Ongoing", "📅 Scheduled", "📝 Planning", "🌟 Wishlist"]
-TYPES = ["🏝️ Holiday", "🌄 Adventure", "😻 Romantic", "🧘‍♀️ Solo", "💼 Work"]
+STATUS = ["Visited", "Ongoing", "Scheduled", "Planning", "Wishlist"]
+TYPES = ["Holiday", "Adventure", "Romantic", "Solo", "Work"]
 RELATIONSHIP = ["Family", "Partner", "Friend", "Coworker"]
 EXPERIENCES = ["Activity", "Place", "Food"]
 
@@ -204,7 +204,7 @@ def edit_trip(trip_id):
         notes = request.form.get("notes_new") or trip["notes"]
 
         # Only handle rating if status is "Visited"
-        if status == "✅ Visited":
+        if status == "Visited":
             rating = request.form.get("rating_new")
             try:
                 # Convert rating to int if provided

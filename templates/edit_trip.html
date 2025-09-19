@@ -6,94 +6,99 @@
 
 {% block main %}
 
-    <!-- Trip update form-->
-    <form action="/edit_trip/{{ trip.id }}" method="post" class="container" style="max-width:800px;">
-        
-        <div class="input-group mb-3">
-            <div class="form-floating">
-                <input type="text" class="form-control" name="trip_name_new" id="name" value="{{ trip.name or '' }}" placeholder="{{ trip.name or 'Insert trip name'}}">
-                <label for="name">Insert or update trip name</label>
-            </div>
-        </div>
-        
-        <div class="row mb-3">
-            <div class="col">
-                <div class="form-floating">
-                    <input type="text" class="form-control" name="country_new" id="country" value="{{ trip.country }}">
-                    <label for="country">Edit or update Country</label>
-                </div>
-            </div>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-8 col-md-6">
             
-            <div class="col">
-                <div class="form-floating">
-                    <input type="text" class="form-control" name="city_new" id="city" value="{{ trip.city }}">
-                    <label for="city">Edit or update City</label>
+            <!-- Trip update form-->
+            <form action="/edit_trip/{{ trip.id }}" method="post">
+                    
+                <!-- Trip name -->                    
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" name="trip_name_new" id="name" value="{{ trip.name or '' }}"
+                        placeholder="{{ trip.name or 'Insert trip name'}}">
+                    <label for="name">Insert or update trip name</label>
                 </div>
-            </div>
-
-        </div>
-        
-        <div class="row mb-3">
-            <div class="col">
-                <div class="input-group">
-                    <div class="input-group-text">Status</div>
-                    {% set status_emoji_map = {
-                        "Visited": "✅",
-                        "Ongoing": "⏱️",
-                        "Scheduled": "📅",
-                        "Planning": "📝",
-                        "Wishlist": "🌟"
-                    } %}
-                    <select class="form-select" name="status_new">
-                        <option disabled selected value="{{ trip.status }}">Change Status</option>
-                        {% for status_option in status %}
-                            <option value="{{ status_option }}" {% if trip.status == status_option %}selected{% endif %}>{{ status_emoji_map[status_option]}} {{ status_option }}</option>
-                        {% endfor %}
-                    </select>
+                    
+                <!-- Country and City -->
+                <div class="row mb-3">
+                    <div class="col-12 col-md-6 mb-3 mb-md-0">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" name="country_new" id="country" value="{{ trip.country }}">
+                            <label for="country">Edit or update Country</label>
+                        </div>
+                    </div>
+                
+                    <div class="col-12 col-md-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" name="city_new" id="city" value="{{ trip.city }}">
+                            <label for="city">Edit or update City</label>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="col">
-                <div class="input-group">
-                    <div class="input-group-text">Trip type</div>
-                    {% set trip_emoji_map = {
-                    "Holiday": "🏝️",
-                    "Adventure": "🌄",
-                    "Romantic": "😻",
-                    "Solo": "🙏",
-                    "Work": "💼"
-                    } %}
-                    <select class="form-select" name="trip_type_new">
-                        <option disabled selected value="{{ trip.trip_type }}">Trip Type</option>
-                            {% for type_option in types %}
-                            <option value="{{ type_option }}" {% if trip.trip_type==type_option %}selected{% endif %}>{{ trip_emoji_map[type_option] }} {{ type_option }}</option>
-                            {% endfor %}
-                    </select>
+                
+                <!-- Trip type -->
+                <div class="row mb-3">
+                    <div class="input-group">
+                        <div class="input-group-text">Trip type</div>
+                            <select class="form-select" name="trip_type_new">
+                                <option disabled selected value="{{ trip.trip_type }}">Trip Type</option>
+                                {% for type_option in types %}
+                                    <option value="{{ type_option }}" {% if trip.trip_type==type_option %}selected{% endif %}>
+                                        {{ type_option }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="col">
-                <div class="input-group">
-                    <div class="input-group-text">Rating</div>
-                    <input type="number" class="form-control" name="rating_new" min="1" max="5" value="{{ trip.rating or '' }}">
+                
+                <!-- Status and Rating -->
+                <div class="row mb-3">
+
+                    <!-- Status -->
+                    <div class="col-12 col-md-auto mb-md-3">
+                        <div class="input-group">
+                            <div class="input-group-text">Status</div>
+                            <select class="form-select" name="status_new">
+                                <option disabled selected value="{{ trip.status }}">Change Status</option>
+                                {% for status_option in status %}
+                                    <option value="{{ status_option }}" {% if trip.status==status_option %}selected{% endif %}>
+                                        {{ status_option }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Rating -->
+                    <div class="col-12 col-md-auto">
+                        <div class="input-group">
+                            <div class="input-group-text">Rating</div>
+                            <input type="number" class="form-control" name="rating_new" min="1" max="5"
+                                value="{{ trip.rating or '' }}">
+                        </div>
+                    </div>
                 </div>
-            </div>
+                
+                <!-- Notes -->
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" name="notes_new" id="notes" placeholder="Notes"
+                        rows="3">{{ trip.notes }}</textarea>
+                    <label for="notes">Notes</label>
+                </div>
+                
+                <!-- Buttons -->
+                <div class="d-flex gap-2 mt-3">
+                    <button class="btn btn-outline-dark" type="submit">Update Trip</button>
+                    <a href="/trip/{{ trip.id }}" class="btn btn-outline-secondary">
+                        <i class="fa-solid fa-xmark"></i> Cancel
+                    </a>
+                </div>
+                
+            </form>
         </div>
-        
-        <div class="form-floating mb-3">
-            <textarea class="form-control" name="notes_new" id="notes" placeholder="Notes" rows="3">{{ trip.notes }}</textarea>
-            <label for="notes">Notes</label>
-        </div>
-
-        <div class="d-flex gap-2 mt-3">
-            <button class="btn btn-outline-dark" type="submit">Update Trip</button>
-            <a href="/trip/{{ trip.id }}" class="btn btn-outline-secondary">
-                <i class="fa-solid fa-xmark"></i> Cancel
-            </a>
-        </div>
-
-
-    </form>
+    </div>
+</div>
 
     <!-- Coded with what I've learnt on SheCodes workshops and verified using chatgpt -->
     <script>

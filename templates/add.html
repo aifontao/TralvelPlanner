@@ -6,59 +6,77 @@
 
 {% block main %}
 
-    <form action="/add" method="post" class="container-form">
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6">
+
+            <form action="/add" method="post" class="container-form">
         
-        <h2 class="my-5">⊕ Add a new trip!</h2>
+                <h2>⊕ Add a new trip!</h2>
 
-        <p class="my-4">Add a new trip to your dashboard! 📋</p>
+                <p class="my-4">Add a new trip to your dashboard! 📋</p>
 
-        <div class="input-group mb-3">
-            <span class="input-group-text">Name</span>
-            <input autocomplete="off" class="form-control" name="name" placeholder="Trip name"
-                type="text">
-        </div>
-        
-        <div class="input-group mb-3">
-            <span class="input-group-text">Country</span>
-            <input autocomplete="off" autofocus class="form-control" name="country" placeholder="Country"
-                type="text">
-        </div>
-
-        <div class="input-group mb-3">
-            <span class="input-group-text">City</span>
-            <input autocomplete="off" class="form-control" name="city" placeholder="City" type="text">
-        </div>
-
-        <div class="row mb-3">
-            <div class="col">
-                <div class="input-group">
-                    <label class="input-group-text" for="status">Status</label>
-                    <select class="form-select" name="status" id="status" aria-label="Select trip status">
-                        <option disabled selected value="">Select...</option>
-                        {% for status_option in status %}
-                            <option value="{{ status_option }}">{{ status_option }}</option>
-                        {% endfor %}
-                    </select>
+                <!-- Trip name -->
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Name</span>
+                    <input autocomplete="off" class="form-control" name="name" placeholder="Trip name"
+                        type="text">
                 </div>
-            </div>
-            
-            <div class="col">
-                <div class="input-group">
-                    <label class="input-group-text" for="type">Trip type</label>
-                    <select class="form-select" name="type" id="type" aria-label="Select trip type">
-                        <option disabled selected value="">Select...</option>
-                        {% for type in types %}
-                            <option value="{{ type }}">{{ type }}</option>
-                        {% endfor %}
-                    </select>
+                
+                <!-- Country -->
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Country</span>
+                    <input autocomplete="off" autofocus class="form-control" name="country" placeholder="Country"
+                        type="text">
                 </div>
-            </div>
-        </div>
-        
-        <div class="my-5">
-            <button class="btn btn-warning mt-4" type="submit"><i class="fa-solid fa-plus"></i> Add trip</button>
-        </div>
 
-    </form>
+                <!-- City -->
+                <div class="input-group mb-3">
+                    <span class="input-group-text">City</span>
+                    <input autocomplete="off" class="form-control" name="city" placeholder="City" type="text">
+                </div>
+
+                <!-- Status and Trip type -->
+                <div class="row mb-3">
+
+                    <!-- Status -->
+                    <div class="col-12 col-md-6 mb-3">
+                        <div class="input-group">
+                            <label class="input-group-text" for="status">Status</label>
+                            <select class="form-select" name="status" id="status" aria-label="Select trip status">
+                                <option disabled selected value="">Select...</option>
+                                {% for status_option in status %}
+                                    <option value="{{ status_option }}">{{ status_option }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Trip type -->
+                    <div class="col-12 col-md-6 mb-3">
+                        <div class="input-group">
+                            <label class="input-group-text" for="type">Trip type</label>
+                            <select class="form-select" name="type" id="type" aria-label="Select trip type">
+                                <option disabled selected value="">Select...</option>
+                                {% for type in types %}
+                                    <option value="{{ type }}">{{ type }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Buttons -->
+                <div class="d-flex gap-2 mt-3 justify-content-center">
+                    <button class="btn btn-warning" type="submit"><i class="fa-solid fa-plus"></i> Add trip</button>
+                    <a href="/" class="btn btn-outline-secondary"><i class="fa-solid fa-xmark"></i> Cancel</a>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+    
 
 {% endblock %}

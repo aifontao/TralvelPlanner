@@ -100,24 +100,24 @@
     </div>
 </div>
 
-    <!-- Coded with what I've learnt on SheCodes workshops and verified using chatgpt -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const statusSelect = document.querySelector('select[name="status_new"]');
-            const ratingInput = document.querySelector('input[name="rating_new"]');
+<!-- Coded with what I've learnt on SheCodes workshops and verified using chatgpt -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const statusSelect = document.querySelector('select[name="status_new"]');
+        const ratingInput = document.querySelector('input[name="rating_new"]');
 
-            function toggleRating() {
-                if (statusSelect.value === "Visited") {
-                    ratingInput.disabled = false;
-                } else {
-                    ratingInput.disabled = true;
-                    ratingInput.value = "";
-                }
+        function toggleRating() {
+            if (statusSelect.value === "Visited") {
+                ratingInput.disabled = false;
+            } else {
+                ratingInput.disabled = true;
+                ratingInput.value = "";
             }
+        }
 
-            statusSelect.addEventListener('change', toggleRating);
-            toggleRating(); // Run on page load
-        });
-    </script>
+        statusSelect.addEventListener('change', toggleRating);
+        toggleRating(); // Run on page load
+    });
+</script>
 
 {% endblock %}

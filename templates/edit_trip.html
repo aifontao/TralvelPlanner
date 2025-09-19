@@ -83,8 +83,8 @@
                 <!-- Notes -->
                 <div class="form-floating mb-3">
                     <textarea class="form-control" name="notes_new" id="notes" placeholder="Notes"
-                        rows="3">{{ trip.notes }}</textarea>
-                    <label for="notes">Notes</label>
+                        rows="3">{% if trip.notes %}{{ trip.notes }}{% endif %}</textarea>
+                    <label for="notes">Add notes or comments</label>
                 </div>
                 
                 <!-- Buttons -->

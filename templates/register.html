@@ -5,19 +5,25 @@
 {% endblock %}
 
 {% block main %}
+<h3 class="my-5">Register</h3>
 <form action="/register" method="post">
-    <div class="mb-3">
+    <p>Type unsername and password</p>
+    <!-- Username -->
+    <div class="my-3">
         <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username"
             type="text">
     </div>
+    <!-- Password -->
     <div class="mb-3">
         <input autocomplete="off" class="form-control mx-auto w-auto" name="password" placeholder="Password"
             type="password">
     </div>
+    <!-- Confirm Password-->
     <div class="mb-3">
         <input autocomplete="off" class="form-control mx-auto w-auto" name="confirmation" placeholder="Password (again)"
             type="password">
     </div>
-    <button class="btn btn-primary" type="submit">Register</button>
+    <!-- Button -->
+    <button class="btn btn-secondary" type="submit">Register</button>
 </form>
 {% endblock %}

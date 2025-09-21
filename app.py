@@ -78,7 +78,7 @@ def index():
     """Show user dashboard"""
 
     trips = db.execute("SELECT id, name, country, city FROM trips WHERE user_id = ?", session["user_id"])
-    print(trips[0])
+    
     # Show image of each trip - Used ChatGPT to add this feature
     enriched_trips = []
     for trip in trips:
@@ -86,7 +86,7 @@ def index():
         image_url = get_city_image(trip["city"])
         trip_copy["image_url"] = image_url
         enriched_trips.append(trip_copy)
-    print(enriched_trips[0])
+
     return render_template("index.html", trips=enriched_trips)
 
 

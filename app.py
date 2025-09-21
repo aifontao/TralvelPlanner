@@ -164,9 +164,9 @@ def add_buddy(trip_id):
         
     return render_template("add_buddy.html", trip=trip_data[0])
 
-@app.route("/delete/<int:trip_id>", methods=["POST"])
+@app.route("/delete_trip/<int:trip_id>", methods=["POST"])
 @login_required
-def delete(trip_id):
+def delete_trip(trip_id):
 
     if request.method == "POST":
         # If the user confirms they want to delete trip

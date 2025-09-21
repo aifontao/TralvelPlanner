@@ -167,18 +167,17 @@ def add_buddy(trip_id):
 @app.route("/delete_trip/<int:trip_id>", methods=["POST"])
 @login_required
 def delete_trip(trip_id):
+    
+    # If the user confirms they want to delete trip
+    # Check if trip exists for this user
+    trip = db.execute("SELECT * FROM trips WHERE id = ? AND user_id = ?", trip_id, session["user_id"])
+    if not trip:
+        return apology("Trip not found or unauthorized")
 
-    if request.method == "POST":
-        # If the user confirms they want to delete trip
-        # Check if trip exists for this user
-        trip = db.execute("SELECT * FROM trips WHERE id = ? AND user_id = ?", trip_id, session["user_id"])
-        if not trip:
-            return apology("Trip not found or unauthorized")
-
-        db.execute("DELETE FROM trips WHERE id = ? AND user_id = ?", trip_id, session["user_id"])            
+    db.execute("DELETE FROM trips WHERE id = ? AND user_id = ?", trip_id, session["user_id"])            
         
-        flash("Trip deleted successfully!")
-        return redirect("/")
+    flash("Trip deleted successfully!")
+    return redirect("/")
         
 
 # Searched chatGPT to understand how to change the route parameter to a given trip_id

@@ -1,18 +1,27 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Log In
+    Log In
 {% endblock %}
 
 {% block main %}
+<h3 class="my-5">Login to your account</h3>
 <form action="/login" method="post">
+    <p>Type your username and password</p>
+    <!-- Username -->
     <div class="mb-3">
         <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username"
             type="text">
     </div>
+    <!-- Password -->
     <div class="mb-3">
         <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
     </div>
+    <!-- Button -->
     <button class="btn btn-secondary" type="submit">Log In</button>
 </form>
+<!-- Register -->
+<div class="my-5">
+    <span>Don't have an account? </span><a href="/register" class="link-secondary">Register</a>
+</div>
 {% endblock %}

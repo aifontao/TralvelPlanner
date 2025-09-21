@@ -138,6 +138,7 @@ def add_trip():
 @login_required
 def add_buddy(trip_id):
     if request.method == "POST":
+        # Get buddy name and relationship type
         buddy_name = request.form.get("buddy_name", "").strip() 
         relationship = request.form.get("relationship")
                 

@@ -101,9 +101,9 @@ def account():
     return render_template("account.html", account=account)
 
 
-@app.route("/add", methods=["GET", "POST"])
+@app.route("/add_trip", methods=["GET", "POST"])
 @login_required
-def add():
+def add_trip():
 
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
@@ -131,7 +131,7 @@ def add():
         flash("Trip added successfully! ☺️")
         return redirect("/")
 
-    return render_template("add.html")
+    return render_template("add_trip.html")
 
 
 @app.route("/trip/<int:trip_id>/add_buddy", methods=["GET", "POST"])

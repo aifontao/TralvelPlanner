@@ -85,9 +85,9 @@
                                         <td>{{ buddy.name }}</td>
                                         <td>{{ buddy.relationship_type }}</td>
                                         <td>
-                                            <a href="/edit_buddy/{{ buddy.id }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                            <a href="/edit_buddy/{{ buddy.id }}" class="btn btn-sm btn-outline-primary" title="Edit buddy"><i class="fa-solid fa-user-pen"></i></a>
                                             <form action="/" method="post" style="display:inline;">
-                                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                                <button type="submit" class="btn btn-sm btn-outline-danger" title="Delete user"><i class="fa-solid fa-eraser"></i></button>
                                             </form>
                                         </td>
                                     </tr>
@@ -98,9 +98,7 @@
 
                     <!-- Button to add a new trip buddy -->
                     <div class="d-flex justify-content-start mt-3">
-                        <a href="/trip/{{ trip.id }}/add_buddy" class="btn btn-success btn-sm">
-                            <i class="fa-solid fa-user-plus"></i> Add buddy
-                        </a>
+                        <a href="/trip/{{ trip.id }}/add_buddy" class="btn btn-success btn-sm" title="Add buddy"><i class="fa-solid fa-user-plus"></i></a>
                     </div>
 
                 </div>

@@ -96,16 +96,16 @@
                         </table>
                     {% endif %}
 
-                    <!-- Button to add a new trip buddy -->
-                    <div class="d-flex justify-content-start mt-3">
-                        <a href="/trip/{{ trip.id }}/add_buddy" class="btn btn-success btn-sm" title="Add buddy"><i class="fa-solid fa-user-plus"></i></a>
-                    </div>
-
                 </div>
             </div>
 
             <!-- Edit and Delete buttons section -->
             <div class="col-md-2 d-flex align-items-start justify-content-end gap-2 p-3">
+                <!-- Button to add a new trip buddy -->
+                <div class="d-flex justify-content-start">
+                    <a href="/trip/{{ trip.id }}/add_buddy" class="btn btn-success btn-sm" title="Add buddy"><i
+                            class="fa-solid fa-user-plus"></i></a>
+                </div>
                 <!-- Edit button -->
                 <a href="/edit_trip/{{ trip.id }}" class="btn btn-secondary btn-sm" data-bs-toggle="tooltip" title="Edit trip">
                     <i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>

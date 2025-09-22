@@ -84,6 +84,12 @@
                                     <tr>
                                         <td>{{ buddy.name }}</td>
                                         <td>{{ buddy.relationship_type }}</td>
+                                        <td>
+                                            <a href="/edit_buddy/{{ buddy.id }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                            <form action="/" method="post" style="display:inline;">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 {% endfor %}
                             </tbody>

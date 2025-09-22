@@ -179,7 +179,38 @@ def delete_trip(trip_id):
         
     flash("Trip deleted successfully!")
     return redirect("/")
-        
+
+
+# Searched chatGPT to understand how to change the route parameter to a given trip_id
+@app.route("/edit_buddy/<int:buddy_id>", methods=["GET", "POST"])
+@login_required
+def edit_buddy(buddy_id):
+
+    print("Buddy ID:", buddy_id)
+    print("User ID:", session["user_id"])
+
+    # Get buddy details
+    buddy = db.execute("SELECT * FROM buddies WHERE id = ? AND trip_id IN (SELECT id FROM trips WHERE user_id = ?)", buddy_id, session["user_id"])
+    if not buddy:
+        print("No buddy found or not authorized")
+        return apology("Buddy not found", 404)
+    buddy = buddy[0]
+
+    # Handle form submission for editing
+    if request.method == "POST":
+        # Use submitted value or keep current one
+        new_name = request.form.get("buddy_name").strip() or buddy["name"]
+        new_relationship = request.form.get("relationship") or buddy["relationship_type"]
+
+        db.execute(
+                "UPDATE buddies SET name = ?, relationship_type = ? WHERE id = ?",
+                new_name, new_relationship, buddy_id
+                )
+        flash("Buddy updated successfully! 😉")
+        return redirect(f"/trip/{buddy['trip_id']}")
+    
+    return render_template("edit_buddy.html", buddy=buddy)
+
 
 # Searched chatGPT to understand how to change the route parameter to a given trip_id
 @app.route("/edit_trip/<int:trip_id>", methods=["GET", "POST"])

@@ -8,12 +8,12 @@ body {
 }
 
 .table-narrow-th th {
-    width: 10%;
+    width: 6%;
     padding: 4px 10px;
 }
 
 .table-narrow-th td {
     white-space: nowrap;
-    width: 50%;
+    width: 35%;
     padding: 4px 10px;
 }

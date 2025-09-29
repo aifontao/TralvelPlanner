@@ -165,6 +165,23 @@ def add_buddy(trip_id):
         
     return render_template("add_buddy.html", trip=trip_data[0])
 
+
+@app.route("/delete_buddy/<int:buddy_id>", methods=["POST"])
+@login_required
+def delete_buddy(buddy_id):
+    
+    # If the user confirms they want to delete buddy
+    # Check if buddy exists for this user and trip
+    buddy = db.execute("SELECT * FROM buddies WHERE id = ? AND trip_id IN (SELECT id FROM trips WHERE user_id = ?)", buddy_id, session["user_id"])
+    if not buddy:
+        return apology("Buddy not found", 404)
+    
+    db.execute("DELETE FROM buddies WHERE id = ?", buddy_id)            
+        
+    flash("Buddy deleted successfully!")
+    return redirect(f"/trip/{buddy[0]['trip_id']}")
+
+
 @app.route("/delete_trip/<int:trip_id>", methods=["POST"])
 @login_required
 def delete_trip(trip_id):

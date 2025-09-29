@@ -88,9 +88,7 @@
                                         <!-- Edit and Delete buddies buttons -->
                                         <td class="text-center">
                                             <button type="button" class="btn btn-sm btn-outline-dark border-0 rounded-5" data-bs-toggle="modal" data-bs-target="#editBuddyModal{{ buddy.id }}" title="Edit Buddy"><i class="fa-solid fa-user-pen"></i></button>
-                                            <form action="/" method="post" style="display:inline;">
-                                                <button type="submit" class="btn btn-sm btn-outline-secondary border-0 rounded-5" title="Delete buddy"><i class="fa-solid fa-eraser"></i></button>
-                                            </form>
+                                            <button type="submit" class="btn btn-sm btn-outline-secondary border-0 rounded-5" data-bs-toggle="modal" data-bs-target="#deleteBuddyModal{{ buddy.id }}" title="Delete buddy"><i class="fa-solid fa-eraser"></i></button>
                                         </td>
                                     </tr>
 
@@ -129,6 +127,35 @@
                                                     </div>
                                     
                                                 </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Modal to confirm Buddy deletion -->
+                                    <div class="modal fade" id="deleteBuddyModal{{ buddy.id }}" tabindex="-1"
+                                        aria-labelledby="deleteBuddyModalLabel{{ buddy.id }}" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                    
+                                                <!-- Modal header -->
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="deleteBuddyModalLabel{{ buddy.id }}">Delete buddy</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                    
+                                                <!-- Modal body with confirmation question -->
+                                                <div class="modal-body">
+                                                    Are you sure you want to delete <strong>{{ buddy.name }}</strong>?
+                                                </div>
+                                    
+                                                <!-- Modal footer with action buttons -->
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    <form method="POST" action="/delete_buddy/{{ buddy.id }}">
+                                                        <button type="submit" class="btn btn-danger">Confirm Delete</button>
+                                                    </form>
+                                                </div>
+                                    
                                             </div>
                                         </div>
                                     </div>

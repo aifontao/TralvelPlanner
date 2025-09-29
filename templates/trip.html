@@ -104,13 +104,14 @@
                                                         <h5 class="modal-title" id="editBuddyLabel{{ buddy.id }}">✏️ Edit Buddy</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>                                                 
-                                    
                                                     <div class="modal-body">
+                                                        <!-- Name -->
                                                         <div class="mb-3 text-start">
                                                             <label for="buddy_name_{{ buddy.id }}" class="form-label fw-bold">Name</label>
                                                             <input type="text" class="form-control" id="buddy_name_{{ buddy.id }}" name="buddy_name"
                                                                 value="{{ buddy.name }}" required>
                                                         </div>
+                                                        <!-- Relationship -->
                                                         <div class="mb-3 text-start">
                                                             <label for="relationship_{{ buddy.id }}" class="form-label fw-bold">Relationship</label>
                                                             <select class="form-select" id="relationship_{{ buddy.id }}" name="relationship">

@@ -192,6 +192,7 @@ def delete_trip(trip_id):
     if not trip:
         return apology("Trip not found or unauthorized")
 
+    db.execute("DELETE FROM buddies WHERE trip_id = ?", trip_id)
     db.execute("DELETE FROM trips WHERE id = ? AND user_id = ?", trip_id, session["user_id"])            
         
     flash("Trip deleted successfully!")

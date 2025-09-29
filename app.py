@@ -207,7 +207,6 @@ def edit_buddy(buddy_id):
     # Get buddy details
     buddy = db.execute("SELECT * FROM buddies WHERE id = ? AND trip_id IN (SELECT id FROM trips WHERE user_id = ?)", buddy_id, session["user_id"])
     if not buddy:
-        print("No buddy found or not authorized")
         return apology("Buddy not found", 404)
     
     # Use submitted value or keep current one

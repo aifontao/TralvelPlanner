@@ -1,4 +1,4 @@
-# Tralvel Planner
+# Travel Planner
 
 #### Video Demo: https://youtu.be/7XdfjiJlPMw
 
